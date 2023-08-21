@@ -18,6 +18,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 
         public string Password { set; get; }
 
+        public static int AccessLevel { get; set; }
 
         public static bool success = false;
 
@@ -26,7 +27,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
         public static void UserLogin()
         {
             userList.Clear();
-            DBConnection.SqlString = @"SELECT userId, userName, password FROM user";
+            DBConnection.SqlString = @"SELECT userId, userName, password, accessLevel FROM user";
             DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
             DBConnection.Reader = DBConnection.Cmd.ExecuteReader();
             if (DBConnection.Reader.HasRows)
@@ -51,6 +52,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                     if (correctUsername(DBUser) && correctPassword(DBUser))
                     {
                         Login.loginSuccessful = true;
+                        AccessLevel = DBConnection.Reader.GetInt32(3);
                     }
                 }
             }

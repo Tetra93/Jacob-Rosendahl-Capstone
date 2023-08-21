@@ -43,6 +43,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.typeBox = new System.Windows.Forms.ComboBox();
+            this.otherTypeTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -67,7 +68,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 65);
+            this.label2.Location = new System.Drawing.Point(42, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(105, 13);
             this.label2.TabIndex = 2;
@@ -77,7 +78,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // 
             this.consultantName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.consultantName.FormattingEnabled = true;
-            this.consultantName.Location = new System.Drawing.Point(153, 88);
+            this.consultantName.Location = new System.Drawing.Point(153, 62);
             this.consultantName.Name = "consultantName";
             this.consultantName.Size = new System.Drawing.Size(121, 21);
             this.consultantName.TabIndex = 4;
@@ -86,7 +87,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 91);
+            this.label3.Location = new System.Drawing.Point(42, 65);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 5;
@@ -95,7 +96,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // endTimePicker
             // 
             this.endTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.endTimePicker.Location = new System.Drawing.Point(153, 167);
+            this.endTimePicker.Location = new System.Drawing.Point(153, 193);
             this.endTimePicker.Name = "endTimePicker";
             this.endTimePicker.ShowUpDown = true;
             this.endTimePicker.Size = new System.Drawing.Size(121, 20);
@@ -105,7 +106,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // datePicker
             // 
             this.datePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.datePicker.Location = new System.Drawing.Point(153, 115);
+            this.datePicker.Location = new System.Drawing.Point(153, 141);
             this.datePicker.MinDate = new System.DateTime(1800, 1, 1, 0, 0, 0, 0);
             this.datePicker.Name = "datePicker";
             this.datePicker.Size = new System.Drawing.Size(121, 20);
@@ -115,7 +116,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // startTimePicker
             // 
             this.startTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.startTimePicker.Location = new System.Drawing.Point(153, 141);
+            this.startTimePicker.Location = new System.Drawing.Point(153, 167);
             this.startTimePicker.Name = "startTimePicker";
             this.startTimePicker.ShowUpDown = true;
             this.startTimePicker.Size = new System.Drawing.Size(121, 20);
@@ -125,7 +126,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(42, 173);
+            this.label4.Location = new System.Drawing.Point(42, 199);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 13);
             this.label4.TabIndex = 9;
@@ -134,7 +135,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(42, 147);
+            this.label5.Location = new System.Drawing.Point(42, 173);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 10;
@@ -143,7 +144,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(42, 121);
+            this.label6.Location = new System.Drawing.Point(42, 147);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(30, 13);
             this.label6.TabIndex = 11;
@@ -173,11 +174,23 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // 
             this.typeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeBox.FormattingEnabled = true;
-            this.typeBox.Location = new System.Drawing.Point(153, 62);
+            this.typeBox.Location = new System.Drawing.Point(153, 88);
             this.typeBox.Name = "typeBox";
             this.typeBox.Size = new System.Drawing.Size(121, 21);
             this.typeBox.TabIndex = 14;
             this.typeBox.SelectedIndexChanged += new System.EventHandler(this.TypeBox_SelectedIndexChanged);
+            // 
+            // otherTypeTextBox
+            // 
+            this.otherTypeTextBox.ForeColor = System.Drawing.Color.Gray;
+            this.otherTypeTextBox.Location = new System.Drawing.Point(153, 115);
+            this.otherTypeTextBox.Name = "otherTypeTextBox";
+            this.otherTypeTextBox.Size = new System.Drawing.Size(121, 20);
+            this.otherTypeTextBox.TabIndex = 15;
+            this.otherTypeTextBox.Text = "Other appointment type";
+            this.otherTypeTextBox.Visible = false;
+            this.otherTypeTextBox.Enter += new System.EventHandler(this.OtherTypeTextBox_Enter);
+            this.otherTypeTextBox.Leave += new System.EventHandler(this.OtherTypeTextBox_Leave);
             // 
             // AddUpdateAppointments
             // 
@@ -185,6 +198,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(445, 312);
+            this.Controls.Add(this.otherTypeTextBox);
             this.Controls.Add(this.typeBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
@@ -224,5 +238,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.ComboBox typeBox;
+        private System.Windows.Forms.TextBox otherTypeTextBox;
     }
 }

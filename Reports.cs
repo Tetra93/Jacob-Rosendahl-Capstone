@@ -35,9 +35,9 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             else if (reportTypeBox.SelectedItem.ToString() == "Consultant schedules")
             {
                 peopleListBox.Items.Clear();
-                foreach (string user in User.userList)
+                foreach (Consultant consultant in Consultant.Consultants)
                 {
-                    peopleListBox.Items.Add(user);
+                    peopleListBox.Items.Add(consultant.Name);
                 }
                 peopleListBox.Visible = true;
             }

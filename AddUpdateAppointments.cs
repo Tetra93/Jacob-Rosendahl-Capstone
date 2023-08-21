@@ -14,6 +14,9 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 {
     public partial class AddUpdateAppointments : Form
     {
+
+        public static Consultant currentConsultant = new Consultant();
+
         public static string CustomerName { set; get; }
 
         public static string AppointmentType { set; get; }
@@ -42,14 +45,14 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 customerName.Items.Add(customer.Name);
             }
-            typeBox.Items.Add("Presentation");
-            typeBox.Items.Add("Scrum");
-            typeBox.Items.Add("Planning");
-            typeBox.Items.Add("Review");
+            //typeBox.Items.Add("Presentation");
+            //typeBox.Items.Add("Scrum");
+            //typeBox.Items.Add("Planning");
+            //typeBox.Items.Add("Review");
 
-            foreach (string user in User.userList)
+            foreach (Consultant consultant in Consultant.Consultants)
             {
-                consultantName.Items.Add(user);
+                consultantName.Items.Add(consultant.Name);
             }
             if (this.Text == "New Appointment")
             {
@@ -88,13 +91,25 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void TypeBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AppointmentType = typeBox.Text;
+            if (typeBox.Text == "Other")
+            {
+                otherTypeTextBox.Visible = true;
+            }
+            else
+            {
+                otherTypeTextBox.Visible = false;
+                AppointmentType = typeBox.Text;
+            }
         }
 
         private void ConsultantName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ConsultantID = consultantName.SelectedIndex + 1;
-            ConsultantName = consultantName.Text;
+            currentConsultant = Consultant.Consultants[consultantName.SelectedIndex];
+            ConsultantID = currentConsultant.UserId;
+            ConsultantName = currentConsultant.Name;
+            typeBox.Items.Clear();
+            typeBox.Items.Add(currentConsultant.Specialty);
+            typeBox.Items.Add("Other");
         }
 
         private void DatePicker_ValueChanged(object sender, EventArgs e)
@@ -175,5 +190,26 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             Appointments.appointments.Show();
         }
 
+        private void OtherTypeTextBox_Enter(object sender, EventArgs e)
+        {
+            if (otherTypeTextBox.Text == "Other appointment type" && otherTypeTextBox.ForeColor == Color.Gray)
+            {
+                otherTypeTextBox.Text = "";
+                otherTypeTextBox.ForeColor = Color.Black;
+            }
+        }
+
+        private void OtherTypeTextBox_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(otherTypeTextBox.Text)) 
+            {
+                otherTypeTextBox.Text = "Other appointment type";
+                otherTypeTextBox.ForeColor = Color.Gray;
+            }
+            else
+            {
+                AppointmentType = otherTypeTextBox.Text;
+            }
+        }
     }
 }

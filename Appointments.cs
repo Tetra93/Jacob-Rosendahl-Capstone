@@ -191,8 +191,12 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            DBAppointment.DeleteAppointment();
-            Appointment.PopulateAppointments();
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this appointment?", "Delete appointment?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (dialogResult == DialogResult.Yes)
+            {
+                DBAppointment.DeleteAppointment();
+                Appointment.PopulateAppointments();
+            }
         }
 
         private void BackButton_Click(object sender, EventArgs e)

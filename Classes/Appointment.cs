@@ -20,8 +20,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 
         public string Type { set; get; }
 
-        public int CustomerID { set; get; }
-
         public string Customer { set; get; }
 
         public string Consultant { set; get; }
@@ -39,7 +37,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
         public static void PopulateAppointments()
         {
             AllAppointments.Clear();
-            DBConnection.SqlString = @"SELECT a.appointmentId, a.type, u1.userName, u2.userName, a.start, a.end
+            DBConnection.SqlString = @"SELECT a.appointmentId, a.type, u1.name, u2.name, a.start, a.end
                                        FROM appointment a
                                        JOIN user u1 ON a.customerId = u1.userID
                                        JOIN user u2 ON a.consultantId = u2.userId
@@ -79,7 +77,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
         {
             AppointmentsFiltered.Clear();
             foreach (Appointment appointment in AllAppointments)
-                if (appointment.Consultant == user)
+                if (appointment.Consultant == user || appointment.Customer == user)
                 {
                     AppointmentsFiltered.Add(appointment);
                 }
@@ -157,7 +155,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
         public override string ToString() =>
             $"{AppointmentID}, " +
             $"{Type}, " +
-            $"{CustomerID}, " +
             $"{CustomerName}, " +
             $"{Consultant}, " +
             $"{StartTime}, " +
