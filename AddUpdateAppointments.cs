@@ -81,7 +81,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 if (customer.Name == CustomerName)
                 {
-                    CustomerID = customer.CustomerID;
+                    CustomerID = customer.UserId;
                 }
             }
         }

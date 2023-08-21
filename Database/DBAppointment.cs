@@ -42,7 +42,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
         public static void AddAppointment()
         {
             CheckAppointment(-1);
-            DBConnection.SqlString = $"INSERT INTO appointment (appointmentId, customerId, userId, type, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+            DBConnection.SqlString = $"INSERT INTO appointment (appointmentId, customerId, consultantId, type, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)" +
                 $" VALUES ({AppointmentID}, {AddUpdateAppointments.CustomerID}, {AddUpdateAppointments.ConsultantID}, \"{AddUpdateAppointments.AppointmentType}\", \"{AddUpdateAppointments.StartTime.ToUniversalTime().ToString("yyyy-MM-dd H:mm:ss")}\", \"{AddUpdateAppointments.EndTime.ToUniversalTime().ToString("yyyy-MM-dd H:mm:ss")}\", CURRENT_TIMESTAMP(), \"{Login.UserName}\", CURRENT_TIMESTAMP(), \"{Login.UserName}\")";
             DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
             DBConnection.Cmd.ExecuteNonQuery();

@@ -44,7 +44,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         {
             if (this.Text == "Add Customer")
             {
-                UserID = (Customer.Customers.Last().CustomerID + 1);
+                UserID = (Customer.Customers.Last().UserId + 1);
                 IDTextBox.Text = UserID.ToString();
                 canSave = false;
             }

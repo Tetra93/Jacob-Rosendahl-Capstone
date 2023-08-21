@@ -10,13 +10,14 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 {
     public class User
     {
-        public static User user = new User();
+        //public static User user = new User();
 
-        //public int UserID { set; get; }
+        public int UserId { set; get; }
 
-        public string UserName { set; get; }
+        public string Name { set; get; }
 
         public string Password { set; get; }
+
 
         public static bool success = false;
 
@@ -25,7 +26,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
         public static void UserLogin()
         {
             userList.Clear();
-            DBConnection.SqlString = @"SELECT userName, password FROM user";
+            DBConnection.SqlString = @"SELECT userId, userName, password FROM user";
             DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
             DBConnection.Reader = DBConnection.Cmd.ExecuteReader();
             if (DBConnection.Reader.HasRows)
@@ -35,15 +36,16 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                     userList.Add(DBConnection.Reader.GetString(0));
                     User DBUser = new User()
                     {
-                        UserName = DBConnection.Reader.GetString(0),
-                        Password = DBConnection.Reader.GetString(1)
+                        UserId = DBConnection.Reader.GetInt32(0),
+                        Name = DBConnection.Reader.GetString(1),
+                        Password = DBConnection.Reader.GetString(2)
                     };
                     //I'm using two lambdas here to validate the username and password.
                     //They compare what was entered to the database record and return whether
                     //or not they match. Each one returns a bool value and if both are true,
                     //the login attempt was successful. It makes it easier to read so I don't have
                     //two long comparison expressions inside the following if statement
-                    Func<User, bool> correctUsername = u => u.UserName == Login.UserName;
+                    Func<User, bool> correctUsername = u => u.Name == Login.UserName;
                     Func<User, bool> correctPassword = u => u.Password == Login.Password;
 
                     if (correctUsername(DBUser) && correctPassword(DBUser))

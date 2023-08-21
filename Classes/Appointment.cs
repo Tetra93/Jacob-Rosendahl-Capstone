@@ -39,12 +39,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
         public static void PopulateAppointments()
         {
             AllAppointments.Clear();
-            DBConnection.SqlString = @"SELECT a.appointmentId, a.type, c.customerID, c.customerName, u.userName, a.start, a.end
-                                       FROM customer c
-                                       JOIN appointment a
-                                       ON c.customerID = a.customerID
-                                       JOIN user u
-                                       ON a.userID = u.userID
+            DBConnection.SqlString = @"SELECT a.appointmentId, a.type, u1.userName, u2.userName, a.start, a.end
+                                       FROM appointment a
+                                       JOIN user u1 ON a.customerId = u1.userID
+                                       JOIN user u2 ON a.consultantId = u2.userId
                                        ORDER BY a.appointmentId";
             DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
             DBConnection.Reader = DBConnection.Cmd.ExecuteReader();
@@ -66,12 +64,11 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                     {
                         AppointmentID = DBConnection.Reader.GetInt32(0),
                         Type = DBConnection.Reader.GetString(1),
-                        CustomerID = DBConnection.Reader.GetInt32(2),
-                        Customer = DBConnection.Reader.GetString(3),
-                        Consultant = DBConnection.Reader.GetString(4),
+                        Customer = DBConnection.Reader.GetString(2),
+                        Consultant = DBConnection.Reader.GetString(3),
                         Date = date,
-                        StartTime = localTime(DBConnection.Reader.GetDateTime(5).ToLocalTime()),
-                        EndTime = localTime(DBConnection.Reader.GetDateTime(6).ToLocalTime()),
+                        StartTime = localTime(DBConnection.Reader.GetDateTime(4).ToLocalTime()),
+                        EndTime = localTime(DBConnection.Reader.GetDateTime(5).ToLocalTime()),
                     });
                 }
             }

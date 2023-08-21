@@ -20,7 +20,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
         public static bool UserCheck(int inputID)
         {
             bool customerExists = false;
-            DBConnection.SqlString = "SELECT customerID FROM customer";
+            DBConnection.SqlString = "SELECT userId FROM user";
             DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
             using (DBConnection.Reader = DBConnection.Cmd.ExecuteReader())
             {

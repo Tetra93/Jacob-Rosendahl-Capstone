@@ -9,13 +9,13 @@ using MySql.Data.MySqlClient;
 
 namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 {
-    public class Customer
+    public class Customer : User
     {
-        public static Customer customer = new Customer();
+        //public static Customer customer = new Customer();
 
-        public int CustomerID { set; get; }
+        //public int UserId { set; get; }
 
-        public string Name { set; get; }
+        //public string Name { set; get; }
 
         public string Address { set; get; }
 
@@ -30,14 +30,11 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
         public static void PopulateCustomers()
         {
             Customers.Clear();
-            DBConnection.SqlString = @"SELECT u.customerID, u.customerName, a.address, a.phone, i.city, o.country 
-                                       FROM customer u 
+            DBConnection.SqlString = @"SELECT u.userID, u.name, a.address, a.phone, a.city, a.country 
+                                       FROM user u 
                                        JOIN address a 
-                                       ON u.addressID = a.addressId 
-                                       JOIN city i 
-                                       ON a.cityID = i.cityId 
-                                       JOIN country o 
-                                       ON i.countryID = o.countryId ";
+                                       ON u.userID = a.addressId
+                                       WHERE u.accessLevel = 3";
             DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
             DBConnection.Reader = DBConnection.Cmd.ExecuteReader();
             if (DBConnection.Reader.HasRows)
@@ -46,7 +43,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                 {
                     Customers.Add(new Customer()
                     {
-                        CustomerID = DBConnection.Reader.GetInt32(0),
+                        UserId = DBConnection.Reader.GetInt32(0),
                         Name = DBConnection.Reader.GetString(1),
                         Address = DBConnection.Reader.GetString(2),
                         Phone = DBConnection.Reader.GetString(3),
@@ -59,7 +56,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
         }
 
         public override string ToString() =>
-            $"{CustomerID}, " +
+            $"{UserId}, " +
             $"{Name}, " +
             $"{Address}, " +
             $"{Phone}, " +
