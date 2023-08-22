@@ -58,14 +58,14 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 string user = peopleListBox.SelectedItem.ToString();
                 Appointment.UserFilter(user);
-                dataGridView1.DataSource = Appointment.AppointmentsFiltered;
+                dataGridView1.DataSource = Appointment.AppointmentsUserFiltered;
                 dataGridView1.Refresh();
             }
             else if (reportTypeBox.SelectedItem.ToString() == "Customer schedules")
             {
                 string customer = peopleListBox.SelectedItem.ToString();
                 Appointment.CustomerFilter(customer);
-                dataGridView1.DataSource = Appointment.AppointmentsFiltered;
+                dataGridView1.DataSource = Appointment.AppointmentsUserFiltered;
                 dataGridView1.Refresh();
             }
         }
@@ -87,11 +87,11 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                             dataGridView1.Rows[i].Selected = true;
                         }
                     }
-                else if (dataGridView1.DataSource == Appointment.AppointmentsFiltered)
+                else if (dataGridView1.DataSource == Appointment.AppointmentsUserFiltered)
                 {
-                    for (int i = 0; i < Appointment.AppointmentsFiltered.Count; i++)
+                    for (int i = 0; i < Appointment.AppointmentsUserFiltered.Count; i++)
                     {
-                        if (Appointment.AppointmentsFiltered[i].ToString().ToUpper().Contains(searchValue.ToUpper()))
+                        if (Appointment.AppointmentsUserFiltered[i].ToString().ToUpper().Contains(searchValue.ToUpper()))
                         {
                             searchCount++;
                             dataGridView1.Rows[i].Selected = true;

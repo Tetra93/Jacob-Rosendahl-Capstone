@@ -18,6 +18,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         public static string Password { set; get; }
 
+        public static User CurrentUser { set; get; }
+
+        public static int AccessLevel { set; get; }
+
         public static bool canClose = false;
         public static bool loginSuccessful = false;
         public static bool appointmentSoon = false;

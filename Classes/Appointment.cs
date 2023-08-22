@@ -16,6 +16,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 
         public static string CustomerName { set; get; }
 
+        public static DateTime MaxDate { set; get; }
+
+        public static DateTime MinDate { set; get; }
+
         public int AppointmentID { set; get; }
 
         public string Type { set; get; }
@@ -32,14 +36,18 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 
         public static BindingList<Appointment> AllAppointments = new BindingList<Appointment>();
 
-        public static BindingList<Appointment> AppointmentsFiltered = new BindingList<Appointment>();
+        public static BindingList<Appointment> AppointmentsUserFiltered = new BindingList<Appointment>();
+
+        public static BindingList<Appointment> AppointmentsDateFiltered = new BindingList<Appointment>();
 
         public static void PopulateAppointments()
         {
             AllAppointments.Clear();
+            MinDate = DateTime.Now;
+            MaxDate = DateTime.Now;
             DBConnection.SqlString = @"SELECT a.appointmentId, a.type, u1.name, u2.name, a.start, a.end
                                        FROM appointment a
-                                       JOIN user u1 ON a.customerId = u1.userID
+                                       JOIN user u1 ON a.customerId = u1.userId
                                        JOIN user u2 ON a.consultantId = u2.userId
                                        ORDER BY a.appointmentId";
             DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
@@ -58,6 +66,14 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                     {
                         date = date.ToLocalTime();
                     }
+                    if (date.Date > MaxDate)
+                    {
+                        MaxDate = date.Date;
+                    }
+                    if (date.Date < MinDate)
+                    {
+                        MinDate = date.Date;
+                    }
                     AllAppointments.Add(new Appointment()
                     {
                         AppointmentID = DBConnection.Reader.GetInt32(0),
@@ -75,22 +91,22 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 
         public static void UserFilter (string user)
         {
-            AppointmentsFiltered.Clear();
+            AppointmentsUserFiltered.Clear();
             foreach (Appointment appointment in AllAppointments)
                 if (appointment.Consultant == user || appointment.Customer == user)
                 {
-                    AppointmentsFiltered.Add(appointment);
+                    AppointmentsUserFiltered.Add(appointment);
                 }
         }
 
         public static void CustomerFilter (string customer)
         {
-            AppointmentsFiltered.Clear();
+            AppointmentsUserFiltered.Clear();
             foreach (Appointment appointment in AllAppointments)
             {
                 if (appointment.Customer == customer)
                 {
-                    AppointmentsFiltered.Add(appointment);
+                    AppointmentsUserFiltered.Add(appointment);
                 }
             }
         }
@@ -135,7 +151,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
             bool doAlert = false;
             foreach (Appointment appointment in AllAppointments)
             {
-                if (appointment.Consultant == Login.UserName)
+                if (appointment.Consultant == Login.CurrentUser.Name)
                 {
                     DateTime date = appointment.Date;
                     if (date.Date == DateTime.Now.Date)
@@ -155,7 +171,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
         public override string ToString() =>
             $"{AppointmentID}, " +
             $"{Type}, " +
-            $"{CustomerName}, " +
+            $"{Customer}, " +
             $"{Consultant}, " +
             $"{StartTime}, " +
             $"{EndTime}";

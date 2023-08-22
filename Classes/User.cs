@@ -14,11 +14,13 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 
         public int UserId { set; get; }
 
+        public string UserName { set; get; }
+
         public string Name { set; get; }
 
         public string Password { set; get; }
 
-        public static int AccessLevel { get; set; }
+        public int AccessLevel { get; set; }
 
         public static bool success = false;
 
@@ -27,7 +29,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
         public static void UserLogin()
         {
             userList.Clear();
-            DBConnection.SqlString = @"SELECT userId, userName, password, accessLevel FROM user";
+            DBConnection.SqlString = @"SELECT userId, userName, name, password, accessLevel FROM user";
             DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
             DBConnection.Reader = DBConnection.Cmd.ExecuteReader();
             if (DBConnection.Reader.HasRows)
@@ -38,21 +40,23 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                     User DBUser = new User()
                     {
                         UserId = DBConnection.Reader.GetInt32(0),
-                        Name = DBConnection.Reader.GetString(1),
-                        Password = DBConnection.Reader.GetString(2)
+                        UserName = DBConnection.Reader.GetString(1),
+                        Name = DBConnection.Reader.GetString(2),
+                        Password = DBConnection.Reader.GetString(3),
+                        AccessLevel = DBConnection.Reader.GetInt32(4)
                     };
                     //I'm using two lambdas here to validate the username and password.
                     //They compare what was entered to the database record and return whether
                     //or not they match. Each one returns a bool value and if both are true,
                     //the login attempt was successful. It makes it easier to read so I don't have
                     //two long comparison expressions inside the following if statement
-                    Func<User, bool> correctUsername = u => u.Name == Login.UserName;
+                    Func<User, bool> correctUsername = u => u.UserName == Login.UserName;
                     Func<User, bool> correctPassword = u => u.Password == Login.Password;
 
                     if (correctUsername(DBUser) && correctPassword(DBUser))
                     {
                         Login.loginSuccessful = true;
-                        AccessLevel = DBConnection.Reader.GetInt32(3);
+                        Login.CurrentUser = DBUser;
                     }
                 }
             }
