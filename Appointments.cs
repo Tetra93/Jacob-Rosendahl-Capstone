@@ -186,34 +186,34 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 toDate.Enabled = true;
                 if (Login.CurrentUser.AccessLevel == 1)
                 {
-                    if (Appointment.AllAppointments.Count <= 1)
-                    {
-                        fromDate.MinDate = Appointment.MinDate;
-                        fromDate.Value = Appointment.MinDate;
-                        toDate.MaxDate = Appointment.MaxDate;
-                        toDate.Value = Appointment.MaxDate;
-                    }
-                    else
+                    //if (Appointment.AllAppointments.Count <= 1)
+                    //{
+                    //    fromDate.MinDate = Appointment.MinDate;
+                    //    fromDate.Value = Appointment.MinDate;
+                    //    toDate.MaxDate = Appointment.MaxDate;
+                    //    toDate.Value = Appointment.MaxDate;
+                    //}
+                    if (Appointment.AllAppointments.Count > 0)
+
                     {
                         fromDate.MinDate = Appointment.AllAppointments[0].Date;
                         fromDate.Value = Appointment.AllAppointments[0].Date;
                         toDate.MaxDate = Appointment.AllAppointments[0].Date;
                         toDate.Value = Appointment.AllAppointments[0].Date;
-
-                        foreach (Appointment appointment in Appointment.AllAppointments)
+                    }
+                    foreach (Appointment appointment in Appointment.AllAppointments)
+                    {
+                        //fromDate.MinDate = DateTime.Now;
+                        //toDate.MaxDate = DateTime.Now.AddDays(1);
+                        if (appointment.Date < fromDate.MinDate)
                         {
-                            //fromDate.MinDate = DateTime.Now;
-                            //toDate.MaxDate = DateTime.Now.AddDays(1);
-                            if (appointment.Date < fromDate.MinDate)
-                            {
-                                fromDate.MinDate = appointment.Date;
-                                fromDate.Value = appointment.Date;
-                            }
-                            if (appointment.Date > toDate.MaxDate)
-                            {
-                                toDate.MaxDate = appointment.Date;
-                                toDate.Value = appointment.Date;
-                            }
+                            fromDate.MinDate = appointment.Date;
+                            fromDate.Value = appointment.Date;
+                        }
+                        if (appointment.Date > toDate.MaxDate)
+                        {
+                            toDate.MaxDate = appointment.Date;
+                            toDate.Value = appointment.Date;
                         }
                     }
                 }
@@ -270,15 +270,28 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                     fromDate.Value = toDate.Value;
                     throw new Exception("Starting date cannot be later than the ending date");
                 }
-                foreach (Appointment appointment in Appointment.AllAppointments)
-                    if (appointment.Date.Date >= fromDate.Value.Date && appointment.Date.Date <= toDate.Value.Date)
+                if (Login.CurrentUser.AccessLevel == 1)
+                {
+                    foreach (Appointment appointment in Appointment.AllAppointments)
                     {
-                        Appointment.AppointmentsDateFiltered.Add(appointment);
+                        if (appointment.Date.Date >= fromDate.Value.Date && appointment.Date.Date <= toDate.Value.Date)
+                        {
+                            Appointment.AppointmentsDateFiltered.Add(appointment);
+                        }
                     }
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = Appointment.AppointmentsDateFiltered;
-                dataGridView1.Refresh();
-            }
+                }
+                else
+                {
+                    foreach (Appointment appointment in Appointment.AppointmentsUserFiltered)
+                        if (appointment.Date.Date >= fromDate.Value.Date && appointment.Date.Date <= toDate.Value.Date)
+                        {
+                            Appointment.AppointmentsDateFiltered.Add(appointment);
+                        }
+                }
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = Appointment.AppointmentsDateFiltered;
+                    dataGridView1.Refresh();
+                }            
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -302,11 +315,26 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                     toDate.Value = fromDate.Value;
                     throw new Exception("Starting date cannot be later than the ending date");
                 }
-                foreach (Appointment appointment in Appointment.AllAppointments)
-                    if (appointment.Date.Date >= fromDate.Value.Date && appointment.Date.Date <= toDate.Value.Date)
+                if (Login.CurrentUser.AccessLevel == 1)
+                {
+                    foreach (Appointment appointment in Appointment.AllAppointments)
                     {
-                        Appointment.AppointmentsDateFiltered.Add(appointment);
+                        if (appointment.Date.Date >= fromDate.Value.Date && appointment.Date.Date <= toDate.Value.Date)
+                        {
+                            Appointment.AppointmentsDateFiltered.Add(appointment);
+                        }
                     }
+                }
+                else
+                {
+                    foreach (Appointment appointment in Appointment.AppointmentsUserFiltered)
+                    {
+                        if (appointment.Date.Date >= fromDate.Value.Date && appointment.Date.Date <= toDate.Value.Date)
+                        {
+                            Appointment.AppointmentsDateFiltered.Add(appointment);
+                        }
+                    }
+                }
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = Appointment.AppointmentsDateFiltered;
                 dataGridView1.Refresh();
