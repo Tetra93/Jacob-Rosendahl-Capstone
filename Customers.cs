@@ -12,23 +12,86 @@ using Jacob_Rosendahl_C969_Scheduling_Application.Database;
 
 namespace Jacob_Rosendahl_C969_Scheduling_Application
 {
-    public partial class Customers : Form
+    public partial class Users : Form
     {
-        public static Customers customers;
+        public static Users users;
 
         public static int ID { set; get; }
 
-        public Customers()
+        public static List<User> usersList = new List<User>();
+
+        public Users()
         {
             InitializeComponent();
-            dataGridView1.DataSource = Customer.Customers;
-            customers = this;
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.Columns.Clear();
+            dataGridView1.Columns.Add("UserId", "User ID");
+            dataGridView1.Columns.Add("AccessLevel", "Role");
+            dataGridView1.Columns.Add("Name", "Name");
+            dataGridView1.Columns.Add("Specialty", "Specialty");
+            dataGridView1.Columns.Add("Address", "Address");
+            dataGridView1.Columns.Add("City", "City");
+            dataGridView1.Columns.Add("Country", "Country");
+            dataGridView1.Columns.Add("Phone", "Phone Number");
+            dataGridView1.Columns.Add("PostalCode", "Postal Code");
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            usersList.Clear();
+            if (Login.CurrentUser.AccessLevel == 1)
+            {
+                usersList.AddRange(Admin.Admins);
+            }
+            usersList.AddRange(Customer.Customers);
+            usersList.AddRange(Consultant.Consultants);
+            usersList = usersList.OrderBy(u => u.UserId).ToList();
+
+            dataGridView1.DataSource = usersList;
+            users = this;
             
         }
 
         private void DataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dataGridView1.ClearSelection();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.DataBoundItem is Admin admin)
+                {
+                    row.Cells["UserId"].Value = admin.UserId;
+                    row.Cells["Name"].Value = admin.Name;
+                    row.Cells["AccessLevel"].Value = "Admin";
+                    row.Cells["Specialty"].Value = "N/A";
+                    row.Cells["Address"].Value = "N/A";
+                    row.Cells["City"].Value = "N/A";
+                    row.Cells["Country"].Value = "N/A";
+                    row.Cells["PostalCode"].Value = "N/A";
+                    row.Cells["Phone"].Value = "N/A";
+                }
+                else if (row.DataBoundItem is Customer customer)
+                {
+                    row.Cells["UserId"].Value = customer.UserId;
+                    row.Cells["Name"].Value = customer.Name;
+                    row.Cells["AccessLevel"].Value = "Customer";
+                    row.Cells["Specialty"].Value = "N/A";
+                    row.Cells["Address"].Value = customer.Address;
+                    row.Cells["City"].Value = customer.City;
+                    row.Cells["Country"].Value = customer.Country;
+                    row.Cells["PostalCode"].Value = customer.PostalCode;
+                    row.Cells["Phone"].Value = customer.Phone;
+                }
+                else if (row.DataBoundItem is Consultant consultant)
+                {
+                    row.Cells["UserId"].Value = consultant.UserId;
+                    row.Cells["Name"].Value = consultant.Name;
+                    row.Cells["AccessLevel"].Value = "Consultant";
+                    row.Cells["Specialty"].Value = consultant.Specialty;
+                    row.Cells["Address"].Value = consultant.Address;
+                    row.Cells["City"].Value = consultant.City;
+                    row.Cells["Country"].Value = consultant.Country;
+                    row.Cells["PostalCode"].Value = consultant.PostalCode;
+                    row.Cells["Phone"].Value = consultant.Phone;
+                }
+            }
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -78,7 +141,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 if (dataGridView1.SelectedRows.Count == 1)
                 {
-                    ID = int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString());
                     updateButton.Enabled = true;
                     deleteButton.Enabled = true;
                 }
@@ -145,5 +207,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             dataGridView1.Refresh();
         }
 
+        
     }
 }

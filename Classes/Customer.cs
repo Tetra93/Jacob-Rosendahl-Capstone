@@ -25,12 +25,14 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 
         public string Country { set; get; }
 
+        public string PostalCode { set; get; }
+
         public static BindingList<Customer> Customers = new BindingList<Customer>();
 
         public static void PopulateCustomers()
         {
             Customers.Clear();
-            DBConnection.SqlString = @"SELECT u.userID, u.name, a.address, a.phone, a.city, a.country 
+            DBConnection.SqlString = @"SELECT u.userID, u.name, a.address, a.phone, a.city, a.country, a.postalCode
                                        FROM user u 
                                        JOIN address a 
                                        ON u.userID = a.addressId
@@ -48,7 +50,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                         Address = DBConnection.Reader.GetString(2),
                         Phone = DBConnection.Reader.GetString(3),
                         City = DBConnection.Reader.GetString(4),
-                        Country = DBConnection.Reader.GetString(5)
+                        Country = DBConnection.Reader.GetString(5),
+                        PostalCode = DBConnection.Reader.GetString(6)
                     });
                 }
             }

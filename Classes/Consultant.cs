@@ -21,12 +21,14 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 
         public string Country { set; get; }
 
+        public string PostalCode { set; get; }
+
         public static BindingList<Consultant> Consultants = new BindingList<Consultant>();
 
         public static void PopulateConsultants()
         {
             Consultants.Clear();
-            DBConnection.SqlString = @"SELECT u.userID, u.name, u.specialty, a.address, a.phone, a.city, a.country 
+            DBConnection.SqlString = @"SELECT u.userID, u.name, u.specialty, a.address, a.phone, a.city, a.country, a.postalCode
                                        FROM user u 
                                        JOIN address a 
                                        ON u.userID = a.addressId
@@ -45,7 +47,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                         Address = DBConnection.Reader.GetString(3),
                         Phone = DBConnection.Reader.GetString(4),
                         City = DBConnection.Reader.GetString(5),
-                        Country = DBConnection.Reader.GetString(6)
+                        Country = DBConnection.Reader.GetString(6),
+                        PostalCode = DBConnection.Reader.GetString(7)
                     });
                 }
             }

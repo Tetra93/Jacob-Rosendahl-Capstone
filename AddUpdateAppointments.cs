@@ -36,7 +36,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         public AddUpdateAppointments()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void AddUpdateAppointments_Load(object sender, EventArgs e)
@@ -45,10 +45,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 customerName.Items.Add(customer.Name);
             }
-            //typeBox.Items.Add("Presentation");
-            //typeBox.Items.Add("Scrum");
-            //typeBox.Items.Add("Planning");
-            //typeBox.Items.Add("Review");
 
             foreach (Consultant consultant in Consultant.Consultants)
             {
@@ -64,10 +60,20 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 customerName.Text = Appointment.AllAppointments[Appointments.CurrentID].Customer;
                 CustomerName = customerName.Text;
-                typeBox.Text = Appointment.AllAppointments[Appointments.CurrentID].Type;
-                AppointmentType = typeBox.Text;
                 consultantName.Text = Appointment.AllAppointments[Appointments.CurrentID].Consultant;
                 ConsultantName = consultantName.Text;
+                if (!typeBox.Items.Contains(Appointment.AllAppointments[Appointments.CurrentID].Type))
+                {
+                    typeBox.SelectedIndex = 1;
+                    otherTypeTextBox.Text = Appointment.AllAppointments[Appointments.CurrentID].Type;
+                    otherTypeTextBox.ForeColor = Color.Black;
+                    AppointmentType = otherTypeTextBox.Text;
+                }
+                else
+                {
+                    typeBox.Text = Appointment.AllAppointments[Appointments.CurrentID].Type;
+                    AppointmentType = typeBox.Text;
+                }
                 datePicker.Value = Appointment.AllAppointments[Appointments.CurrentID].Date;
                 Date = datePicker.Value.Date;
                 startTimePicker.Value = DateTime.Parse(Appointment.AllAppointments[Appointments.CurrentID].StartTime.ToString()).AddDays(1);

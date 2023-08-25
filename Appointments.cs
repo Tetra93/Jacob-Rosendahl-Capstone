@@ -24,57 +24,21 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         public Appointments()
         {
             InitializeComponent();
+            if (Login.CurrentUser.AccessLevel == 3)
+            {
+                newButton.Enabled = false;
+                updateButton.Enabled = false;
+                deleteButton.Enabled = false;
+            }
             dataGridView1.DataSource = null;
             if (Login.CurrentUser.AccessLevel == 3 || Login.CurrentUser.AccessLevel == 2)
             {
                 Appointment.UserFilter(Login.CurrentUser.Name);
                 dataGridView1.DataSource = Appointment.AppointmentsUserFiltered;
-                //if (Appointment.AppointmentsUserFiltered.Count > 0)
-                //{
-                //    otherRadio.Checked = true;
-                //    fromDate.MinDate = Appointment.AppointmentsUserFiltered[0].Date;
-                //    fromDate.Value = Appointment.AppointmentsUserFiltered[0].Date;
-                //    toDate.MaxDate = Appointment.AppointmentsUserFiltered[0].Date;
-                //    toDate.Value = Appointment.AppointmentsUserFiltered[0].Date;
-                //}                        
-                //foreach (Appointment appointment in Appointment.AppointmentsUserFiltered)
-                //{
-                //    //fromDate.MinDate = DateTime.Now;
-                //    //toDate.MaxDate = DateTime.Now.AddDays(1);
-                //    if (appointment.Date < fromDate.MinDate)
-                //    {
-                //        fromDate.MinDate = appointment.Date;
-                //        fromDate.Value = appointment.Date;
-                //    }
-                //    if (appointment.Date > toDate.MaxDate)
-                //    {
-                //        toDate.MaxDate = appointment.Date;
-                //        toDate.Value = appointment.Date;
-                //    }
-                //}
             }
             else
             {
                 dataGridView1.DataSource = Appointment.AllAppointments;
-                //fromDate.Enabled = true;
-                //toDate.Enabled = true;
-                //fromDate.MinDate = DateTime.Now;
-                //toDate.MaxDate = DateTime.Now.AddDays(1);
-                //foreach (Appointment appointment in Appointment.AllAppointments)
-                //{
-                //    if (appointment.Date < fromDate.MinDate)
-                //    {
-                //        fromDate.MinDate = appointment.Date;
-                //        fromDate.Value = appointment.Date;
-                //    }
-                //    if (appointment.Date > toDate.MaxDate)
-                //    {
-                //        toDate.MaxDate = appointment.Date;
-                //        toDate.Value = appointment.Date;
-                //    }
-                //}
-                //fromDate.Enabled = false;
-                //toDate.Enabled = false;
             }
             allRadio.Checked = true;
             appointments = this;
@@ -186,13 +150,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 toDate.Enabled = true;
                 if (Login.CurrentUser.AccessLevel == 1)
                 {
-                    //if (Appointment.AllAppointments.Count <= 1)
-                    //{
-                    //    fromDate.MinDate = Appointment.MinDate;
-                    //    fromDate.Value = Appointment.MinDate;
-                    //    toDate.MaxDate = Appointment.MaxDate;
-                    //    toDate.Value = Appointment.MaxDate;
-                    //}
                     if (Appointment.AllAppointments.Count > 0)
 
                     {
@@ -203,8 +160,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                     }
                     foreach (Appointment appointment in Appointment.AllAppointments)
                     {
-                        //fromDate.MinDate = DateTime.Now;
-                        //toDate.MaxDate = DateTime.Now.AddDays(1);
                         if (appointment.Date < fromDate.MinDate)
                         {
                             fromDate.MinDate = appointment.Date;
@@ -228,8 +183,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                     }
                     foreach (Appointment appointment in Appointment.AppointmentsUserFiltered)
                     {
-                        //fromDate.MinDate = DateTime.Now;
-                        //toDate.MaxDate = DateTime.Now.AddDays(1);
                         if (appointment.Date < fromDate.MinDate)
                         {
                             fromDate.MinDate = appointment.Date;
@@ -352,6 +305,13 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            if (Login.CurrentUser.AccessLevel == 3)
+            {
+                newButton.Enabled = false;
+                updateButton.Enabled = false;
+                deleteButton.Enabled = false;
+                return;
+            }
             if (dataGridView1.CurrentRow != null)
             {
                 if (dataGridView1.SelectedRows.Count == 1)

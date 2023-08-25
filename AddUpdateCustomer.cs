@@ -50,15 +50,15 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             }
             if (this.Text == "Update Customer")
             {
-                UserID = Customers.ID;
+                UserID = Users.ID;
                 IDTextBox.Text = UserID.ToString();
-                nameTextBox.Text = Customer.Customers[Customers.ID -1].Name;
-                addressTextBox.Text = Customer.Customers[Customers.ID - 1].Address;
-                cityTextBox.Text = Customer.Customers[Customers.ID - 1].City;
-                DBCustomerChecks.AddressCheck(Customers.ID);
+                nameTextBox.Text = Customer.Customers[Users.ID -1].Name;
+                addressTextBox.Text = Customer.Customers[Users.ID - 1].Address;
+                cityTextBox.Text = Customer.Customers[Users.ID - 1].City;
+                DBCustomerChecks.AddressCheck(Users.ID);
                 postalTextBox.Text = DBCustomerChecks.PostalCode;
-                countryTextBox.Text = Customer.Customers[Customers.ID - 1].Country;
-                phoneTextBox.Text = Customer.Customers[Customers.ID - 1].Phone;
+                countryTextBox.Text = Customer.Customers[Users.ID - 1].Country;
+                phoneTextBox.Text = Customer.Customers[Users.ID - 1].Phone;
                 canSave = true;
             }
         }
@@ -130,7 +130,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void AddUpdateCustomer_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Customers.customers.Show();
+            Users.users.Show();
         }
     }
 }

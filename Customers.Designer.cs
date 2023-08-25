@@ -1,7 +1,7 @@
 ﻿
 namespace Jacob_Rosendahl_C969_Scheduling_Application
 {
-    partial class Customers
+    partial class Users
     {
         /// <summary>
         /// Required designer variable.
@@ -44,6 +44,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -124,7 +126,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.searchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchTextBox_KeyDown);
             this.searchTextBox.Validated += new System.EventHandler(this.SearchTextBox_Validated);
             // 
-            // Customers
+            // Users
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -137,7 +139,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "Customers";
+            this.Name = "Users";
             this.Text = "Customers";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Customers_FormClosing);
             this.Shown += new System.EventHandler(this.Customers_Shown);
