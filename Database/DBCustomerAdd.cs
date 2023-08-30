@@ -12,10 +12,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
 
         public static void AddUser()
         {
-            if (DBCustomerChecks.UserCheck(AddUpdateCustomer.UserID) == false)
+            if (DBCustomerChecks.UserCheck(AddUpdateUser.UserID) == false)
             {
-                DBConnection.SqlString = $"INSERT INTO user (userId, userName, createdBy, lastUpdateBy)" +
-                    $" VALUES ({DBCustomerChecks.LastCustomerID + 1}, \"{AddUpdateCustomer.CustomerName}\", {DBCustomerChecks.LastCustomerID}, \"{Login.UserName}\", \"{Login.UserName}\")";
+                DBConnection.SqlString = $"INSERT INTO user (userId, name, createdBy, lastUpdateBy)" +
+                    $" VALUES ({DBCustomerChecks.LastCustomerID}, \"{AddUpdateUser.CustomerName}\", {DBCustomerChecks.LastCustomerID}, \"{Login.UserName}\", \"{Login.UserName}\")";
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
                 DBConnection.Cmd.ExecuteNonQuery();
             }
@@ -25,11 +25,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
 
         public static void AddAddress()
         {
-            if (DBCustomerChecks.AddressCheck(AddUpdateCustomer.UserID) == false)
             {
-                DBCustomerChecks.UserCheck(AddUpdateCustomer.UserID);
-                DBConnection.SqlString = $"INSERT INTO address (addressId, address, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)" +
-                    $" VALUES ({DBCustomerChecks.LastCustomerID}, \"{AddUpdateCustomer.Address}\", {DBCustomerChecks.LastCityID}, \"{AddUpdateCustomer.PostalCode}\", \"{AddUpdateCustomer.Phone}\", CURRENT_TIMESTAMP(), \"{Login.UserName}\", CURRENT_TIMESTAMP(), \"{Login.UserName}\")";
+                DBCustomerChecks.UserCheck(AddUpdateUser.UserID);
+                DBConnection.SqlString = $"INSERT INTO address (addressId, address, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+                    $" VALUES ({DBCustomerChecks.LastCustomerID + 1}, \"{AddUpdateUser.Address}\", \"{AddUpdateUser.PostalCode}\", \"{AddUpdateUser.Phone}\", CURRENT_TIMESTAMP(), \"{Login.UserName}\", CURRENT_TIMESTAMP(), \"{Login.UserName}\")";
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
                 DBConnection.Cmd.ExecuteNonQuery();
             }
@@ -37,7 +36,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
 
         public static void CustomerAddressCorrect()
         {
-            if (DBCustomerChecks.UserCheck(AddUpdateCustomer.UserID) == true)
+            if (DBCustomerChecks.UserCheck(AddUpdateUser.UserID) == true)
             {
                 DBConnection.SqlString = $"UPDATE user " +
                     $"SET addressId = {DBCustomerChecks.LastCustomerID} " +

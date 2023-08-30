@@ -9,13 +9,13 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
 {
     class DBCustomerUpdate
     {
-        public static void UpdateCustomer()
+        public static void UpdateUser()
         {
-            if (DBCustomerChecks.UserCheck(AddUpdateCustomer.UserID) == true)
+            if (DBCustomerChecks.UserCheck(AddUpdateUser.UserID) == true)
             {
-                DBConnection.SqlString = $"UPDATE customer " +
-                    $"SET customerName = \"{AddUpdateCustomer.CustomerName}\", lastUpdate = CURRENT_TIMESTAMP(), lastUpdateBy = \"{Login.UserName}\" " +
-                    $"WHERE customerId = {DBCustomerChecks.LastCustomerID}";
+                DBConnection.SqlString = $"UPDATE user " +
+                    $"SET name = \"{AddUpdateUser.CustomerName}\", specialty = {AddUpdateUser.CurrentSpecialty} lastUpdate = CURRENT_TIMESTAMP(), lastUpdateBy = \"{Login.UserName}\" " +
+                    $"WHERE userId = {DBCustomerChecks.LastCustomerID}";
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
                 DBConnection.Cmd.ExecuteNonQuery();
             }
@@ -23,10 +23,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
 
         public static void UpdateAddress()
         {
-            if (DBCustomerChecks.AddressCheck(AddUpdateCustomer.UserID) == true)
+            if (DBCustomerChecks.AddressCheck(AddUpdateUser.UserID) == true)
             {
                 DBConnection.SqlString = $"UPDATE address " +
-                    $"SET address = \"{AddUpdateCustomer.Address}\", cityId = {DBCustomerChecks.LastCityID}, postalCode = \"{AddUpdateCustomer.PostalCode}\", phone = \"{AddUpdateCustomer.Phone}\", lastUpdate = CURRENT_TIMESTAMP(), lastUpdateBy = \"{Login.UserName}\" " +
+                    $"SET address = \"{AddUpdateUser.Address}\", postalCode = \"{AddUpdateUser.PostalCode}\", phone = \"{AddUpdateUser.Phone}\", lastUpdate = CURRENT_TIMESTAMP(), lastUpdateBy = \"{Login.UserName}\" " +
                     $"WHERE addressId = {DBCustomerChecks.LastCustomerID}";
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
                 DBConnection.Cmd.ExecuteNonQuery();

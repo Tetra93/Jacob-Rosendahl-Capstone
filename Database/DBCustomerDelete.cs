@@ -12,10 +12,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
     {
         public static void DeleteCustomer()
         {
-            if (DBCustomerChecks.UserCheck(Users.ID) == true)
+            if (DBCustomerChecks.UserCheck(Users.Id) == true)
             {
-                DBConnection.SqlString = $"DELETE FROM appointment WHERE customerId = {Users.ID}; " +
-                    $"DELETE FROM customer WHERE addressId = {Users.ID}";
+                DBConnection.SqlString = $"DELETE FROM appointment WHERE customerId = {Users.Id}; " +
+                    $"DELETE FROM customer WHERE addressId = {Users.Id}";
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
                 DBConnection.Cmd.ExecuteNonQuery();
                 Appointment.PopulateAppointments();
@@ -24,9 +24,9 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
 
         public static void DeleteAddress()
         {
-            if (DBCustomerChecks.AddressCheck(Users.ID) == true)
+            if (DBCustomerChecks.AddressCheck(Users.Id) == true)
             {
-                DBConnection.SqlString = $"DELETE FROM address WHERE addressId = {Users.ID}";
+                DBConnection.SqlString = $"DELETE FROM address WHERE addressId = {Users.Id}";
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
                 DBConnection.Cmd.ExecuteNonQuery();
             }

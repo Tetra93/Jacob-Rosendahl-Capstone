@@ -12,19 +12,29 @@ using Jacob_Rosendahl_C969_Scheduling_Application.Database;
 
 namespace Jacob_Rosendahl_C969_Scheduling_Application
 {
-    public partial class AddUpdateCustomer : Form
+    public partial class AddUpdateUser : Form
     {
         public static int UserID { set; get; }
         public static string CustomerName { set; get; }
+        public static string Specialty { get; set; }
         public static string Address { set; get; }
         public static string City { set; get; }
         public static string PostalCode { set; get; }
         public static string Country { set; get; }
         public static string Phone { set; get; }
+        public static string Role { set; get; }
+        public static string CurrentSpecialty { set; get; }
+        public static string CurrentAddress { set; get; }
+        public static string CurrentCity { set; get; }
+        public static string CurrentPostalCode { set; get; }
+        public static string CurrentCountry { set; get; }
+        public static string CurrentPhone { set; get; }
+
 
         public static bool canSave = false;
 
-        public AddUpdateCustomer()
+
+        public AddUpdateUser()
         {
             InitializeComponent();
         }
@@ -42,23 +52,43 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void AddModifyCustomer_Load(object sender, EventArgs e)
         {
-            if (this.Text == "Add Customer")
+            if (this.Text == "Add User")
             {
-                UserID = (Customer.Customers.Last().UserId + 1);
+                UserID = (Users.LastId + 1);
                 IDTextBox.Text = UserID.ToString();
                 canSave = false;
             }
-            if (this.Text == "Update Customer")
+            if (this.Text == "Update User")
             {
-                UserID = Users.ID;
+                UserID = Users.Id;
                 IDTextBox.Text = UserID.ToString();
-                nameTextBox.Text = Customer.Customers[Users.ID -1].Name;
-                addressTextBox.Text = Customer.Customers[Users.ID - 1].Address;
-                cityTextBox.Text = Customer.Customers[Users.ID - 1].City;
-                DBCustomerChecks.AddressCheck(Users.ID);
-                postalTextBox.Text = DBCustomerChecks.PostalCode;
-                countryTextBox.Text = Customer.Customers[Users.ID - 1].Country;
-                phoneTextBox.Text = Customer.Customers[Users.ID - 1].Phone;
+                nameTextBox.Text = Users.usersList[Users.Id -1].Name;
+                if (Role != "Admin")
+                {
+                    addressTextBox.Text = CurrentAddress;
+                    cityTextBox.Text = CurrentCity;
+                    DBCustomerChecks.AddressCheck(Users.Id);
+                    postalTextBox.Text = DBCustomerChecks.PostalCode;
+                    countryTextBox.Text = CurrentCountry;
+                    phoneTextBox.Text = CurrentPhone;
+                }
+                if (Role == "Consultant")
+                {
+                    specialtyTextBox.Text = CurrentSpecialty;
+                }
+                if (Role == "Admin")
+                {
+                    addressTextBox.Visible = false;
+                    cityTextBox.Visible = false;
+                    postalTextBox.Visible = false;
+                    countryTextBox.Visible = false;
+                    phoneTextBox.Visible = false;
+                    specialtyTextBox.Visible = false;
+                }
+                else if (Role == "Customer")
+                {
+                    specialtyTextBox.Visible = false;
+                }
                 canSave = true;
             }
         }
@@ -106,19 +136,20 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                     }
                 }
             }
-            if (this.Text == "Add Customer")
+            if (this.Text == "Add User")
             {
                 DBCustomerAdd.AddUser();
                 DBCustomerAdd.AddAddress();
-                DBCustomerAdd.CustomerAddressCorrect();
+                //DBCustomerAdd.CustomerAddressCorrect();
             }
-            else if (this.Text == "Update Customer")
+            else if (this.Text == "Update User")
             {
-                DBCustomerUpdate.UpdateCustomer();
+                DBCustomerUpdate.UpdateUser();
                 DBCustomerUpdate.UpdateAddress();
             }
             ClearAll();
             this.Close();
+            User.PopulateUsers();
             Customer.PopulateCustomers();
         }
 

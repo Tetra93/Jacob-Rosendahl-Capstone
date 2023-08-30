@@ -92,11 +92,11 @@
     <Compile Include="Classes\Consultant.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\Customer.cs" />
-    <Compile Include="Customers.cs">
+    <Compile Include="Users.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Customers.Designer.cs">
-      <DependentUpon>Customers.cs</DependentUpon>
+    <Compile Include="Users.Designer.cs">
+      <DependentUpon>Users.cs</DependentUpon>
     </Compile>
     <Compile Include="Appointments.cs">
       <SubType>Form</SubType>
@@ -108,11 +108,11 @@
     <Compile Include="Database\DBAppointment.cs" />
     <Compile Include="Database\DBCustomerChecks.cs" />
     <Compile Include="Database\DBConnection.cs" />
-    <Compile Include="AddUpdateCustomer.cs">
+    <Compile Include="AddUpdateUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddUpdateCustomer.Designer.cs">
-      <DependentUpon>AddUpdateCustomer.cs</DependentUpon>
+    <Compile Include="AddUpdateUser.Designer.cs">
+      <DependentUpon>AddUpdateUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Database\DBCustomerDelete.cs" />
     <Compile Include="Database\DBCustomerUpdate.cs" />
@@ -154,11 +154,11 @@
     <EmbeddedResource Include="Appointments.resx">
       <DependentUpon>Appointments.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Customers.resx">
-      <DependentUpon>Customers.cs</DependentUpon>
+    <EmbeddedResource Include="Users.resx">
+      <DependentUpon>Users.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddUpdateCustomer.resx">
-      <DependentUpon>AddUpdateCustomer.cs</DependentUpon>
+    <EmbeddedResource Include="AddUpdateUser.resx">
+      <DependentUpon>AddUpdateUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports.resx">
       <DependentUpon>Reports.cs</DependentUpon>

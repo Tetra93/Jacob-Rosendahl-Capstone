@@ -13,13 +13,9 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
 
         public static string PostalCode { set; get; }
 
-        public static int LastCityID { set; get; }
-
-        public static int LastCountryID { set; get; }
-
         public static bool UserCheck(int inputID)
         {
-            bool customerExists = false;
+            bool userExists = false;
             DBConnection.SqlString = "SELECT userId FROM user";
             DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
             using (DBConnection.Reader = DBConnection.Cmd.ExecuteReader())
@@ -32,13 +28,13 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
                         LastCustomerID = ID;
                         if (ID == inputID)
                         {
-                            customerExists = true;
+                            userExists = true;
                             break;
                         }
                     }
                 }
             }
-            return customerExists;
+            return userExists;
         }
 
         //public static bool UserCheck()
@@ -56,7 +52,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
                     {
                         int ID = DBConnection.Reader.GetInt32(0);
                         LastCustomerID = ID;
-                        PostalCode = DBConnection.Reader.GetString(3);
+                        if (!DBConnection.Reader.IsDBNull(DBConnection.Reader.GetOrdinal("postalCode")))
+                        {
+                            PostalCode = DBConnection.Reader.GetString(2);
+                        }
                         if (ID == inputID)
                         {
                             addressExists = true;

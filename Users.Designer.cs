@@ -140,9 +140,9 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Users";
-            this.Text = "Customers";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Customers_FormClosing);
-            this.Shown += new System.EventHandler(this.Customers_Shown);
+            this.Text = "Users";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Users_FormClosing);
+            this.Shown += new System.EventHandler(this.Users_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

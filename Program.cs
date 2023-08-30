@@ -21,6 +21,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			DBConnection.StartConnection();
+			User.PopulateUsers();
 			Customer.PopulateCustomers();
 			Consultant.PopulateConsultants();
 			Admin.PopulateAdmins();

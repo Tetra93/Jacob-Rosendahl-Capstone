@@ -1,7 +1,7 @@
 ﻿
 namespace Jacob_Rosendahl_C969_Scheduling_Application
 {
-    partial class AddUpdateCustomer
+    partial class AddUpdateUser
     {
         /// <summary>
         /// Required designer variable.
@@ -45,6 +45,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.cancelButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.postalTextBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.specialtyTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -84,7 +86,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // 
             // addressTextBox
             // 
-            this.addressTextBox.Location = new System.Drawing.Point(135, 81);
+            this.addressTextBox.Location = new System.Drawing.Point(135, 107);
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.Size = new System.Drawing.Size(100, 20);
             this.addressTextBox.TabIndex = 1;
@@ -92,7 +94,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // 
             // cityTextBox
             // 
-            this.cityTextBox.Location = new System.Drawing.Point(135, 107);
+            this.cityTextBox.Location = new System.Drawing.Point(135, 133);
             this.cityTextBox.Name = "cityTextBox";
             this.cityTextBox.Size = new System.Drawing.Size(100, 20);
             this.cityTextBox.TabIndex = 2;
@@ -100,7 +102,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // 
             // countryTextBox
             // 
-            this.countryTextBox.Location = new System.Drawing.Point(135, 159);
+            this.countryTextBox.Location = new System.Drawing.Point(135, 185);
             this.countryTextBox.Name = "countryTextBox";
             this.countryTextBox.Size = new System.Drawing.Size(100, 20);
             this.countryTextBox.TabIndex = 4;
@@ -108,7 +110,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // 
             // phoneTextBox
             // 
-            this.phoneTextBox.Location = new System.Drawing.Point(135, 185);
+            this.phoneTextBox.Location = new System.Drawing.Point(135, 211);
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.Size = new System.Drawing.Size(100, 20);
             this.phoneTextBox.TabIndex = 5;
@@ -117,7 +119,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 84);
+            this.label3.Location = new System.Drawing.Point(35, 110);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 13);
             this.label3.TabIndex = 9;
@@ -126,7 +128,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(35, 188);
+            this.label4.Location = new System.Drawing.Point(35, 214);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 10;
@@ -135,7 +137,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(35, 110);
+            this.label5.Location = new System.Drawing.Point(35, 136);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(24, 13);
             this.label5.TabIndex = 11;
@@ -144,7 +146,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(35, 162);
+            this.label6.Location = new System.Drawing.Point(35, 188);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 12;
@@ -152,7 +154,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(38, 237);
+            this.saveButton.Location = new System.Drawing.Point(38, 263);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 6;
@@ -162,7 +164,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(135, 237);
+            this.cancelButton.Location = new System.Drawing.Point(135, 263);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 7;
@@ -173,7 +175,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(35, 136);
+            this.label7.Location = new System.Drawing.Point(35, 162);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(64, 13);
             this.label7.TabIndex = 13;
@@ -181,18 +183,36 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             // 
             // postalTextBox
             // 
-            this.postalTextBox.Location = new System.Drawing.Point(135, 133);
+            this.postalTextBox.Location = new System.Drawing.Point(135, 159);
             this.postalTextBox.Name = "postalTextBox";
             this.postalTextBox.Size = new System.Drawing.Size(100, 20);
             this.postalTextBox.TabIndex = 3;
             this.postalTextBox.TextChanged += new System.EventHandler(this.PostalTextBox_TextChanged);
             // 
-            // AddUpdateCustomer
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(35, 84);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(50, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Specialty";
+            // 
+            // specialtyTextBox
+            // 
+            this.specialtyTextBox.Location = new System.Drawing.Point(135, 81);
+            this.specialtyTextBox.Name = "specialtyTextBox";
+            this.specialtyTextBox.Size = new System.Drawing.Size(100, 20);
+            this.specialtyTextBox.TabIndex = 14;
+            // 
+            // AddUpdateUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(263, 281);
+            this.ClientSize = new System.Drawing.Size(262, 298);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.specialtyTextBox);
             this.Controls.Add(this.postalTextBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cancelButton);
@@ -209,7 +229,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.Controls.Add(this.IDTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "AddUpdateCustomer";
+            this.Name = "AddUpdateUser";
             this.Text = "Add Customer";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddUpdateCustomer_FormClosed);
             this.Load += new System.EventHandler(this.AddModifyCustomer_Load);
@@ -235,5 +255,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox postalTextBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox specialtyTextBox;
     }
 }

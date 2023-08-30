@@ -26,6 +26,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 
         public static List<string> userList = new List<string>();
 
+        public static List<User> allUsers = new List<User>();
+
         public static void UserLogin()
         {
             userList.Clear();
@@ -57,6 +59,35 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                     {
                         Login.loginSuccessful = true;
                         Login.CurrentUser = DBUser;
+                    }
+                }
+            }
+            DBConnection.Reader.Close();
+        }
+
+        public static void PopulateUsers ()
+        {
+
+            allUsers.Clear();
+            DBConnection.SqlString = @"SELECT userId, userName, name, accessLevel FROM user";
+            DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
+            DBConnection.Reader = DBConnection.Cmd.ExecuteReader();
+            if (DBConnection.Reader.HasRows)
+            {
+                while (DBConnection.Reader.Read())
+                {
+                    userList.Add(DBConnection.Reader.GetString(0));
+                    User DBUser = new User()
+                    {
+                        UserId = DBConnection.Reader.GetInt32(0),
+                        UserName = DBConnection.Reader.GetString(1),
+                        Name = DBConnection.Reader.GetString(2),
+                        AccessLevel = DBConnection.Reader.GetInt32(3)
+                    };
+                    allUsers.Add(DBUser);
+                    if (DBUser.UserId > Users.LastId)
+                    {
+                        Users.LastId = DBUser.UserId;
                     }
                 }
             }

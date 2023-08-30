@@ -16,7 +16,9 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
     {
         public static Users users;
 
-        public static int ID { set; get; }
+        public static int Id { set; get; }
+
+        public static int LastId { set; get; }
 
         public static List<User> usersList = new List<User>();
 
@@ -164,17 +166,25 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            AddUpdateCustomer addModifyCustomer = new AddUpdateCustomer();
-            addModifyCustomer.Text = "Add Customer";
-            addModifyCustomer.Show();
+            AddUpdateUser addUpdateUser = new AddUpdateUser();
+            addUpdateUser.Text = "Add User";
+            addUpdateUser.Show();
             this.Hide();
         }
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            AddUpdateCustomer addModifyCustomer = new AddUpdateCustomer();
-            addModifyCustomer.Text = "Update Customer";
-            addModifyCustomer.Show();
+            Id = int.Parse(dataGridView1.CurrentRow.Cells["UserID"].Value.ToString());
+            AddUpdateUser.Role = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            AddUpdateUser.CurrentSpecialty = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            AddUpdateUser.CurrentAddress = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            AddUpdateUser.CurrentCity = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            AddUpdateUser.CurrentCountry = dataGridView1.CurrentRow.Cells[6].Value.ToString();
+            AddUpdateUser.CurrentPhone = dataGridView1.CurrentRow.Cells[7].Value.ToString();
+            AddUpdateUser.CurrentPostalCode = dataGridView1.CurrentRow.Cells[8].Value.ToString();
+            AddUpdateUser addUpdateUser = new AddUpdateUser();
+            addUpdateUser.Text = "Update User";
+            addUpdateUser.Show();
             this.Hide();
         }
 
@@ -187,6 +197,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 {
                     DBCustomerDelete.DeleteCustomer();
                     DBCustomerDelete.DeleteAddress();
+                    User.PopulateUsers();
                     Customer.PopulateCustomers();
                 }
             }
@@ -197,16 +208,14 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.Close();
         }
 
-        private void Customers_FormClosing(object sender, FormClosingEventArgs e)
+        private void Users_FormClosing(object sender, FormClosingEventArgs e)
         {
             HomeMenu.homeMenu.Show();
         }
 
-        private void Customers_Shown(object sender, EventArgs e)
+        private void Users_Shown(object sender, EventArgs e)
         {
             dataGridView1.Refresh();
-        }
-
-        
+        }        
     }
 }
