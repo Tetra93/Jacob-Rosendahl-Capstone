@@ -204,6 +204,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.specialtyTextBox.Name = "specialtyTextBox";
             this.specialtyTextBox.Size = new System.Drawing.Size(100, 20);
             this.specialtyTextBox.TabIndex = 14;
+            this.specialtyTextBox.TextChanged += new System.EventHandler(this.SpecialtyTextBox_TextChanged);
             // 
             // AddUpdateUser
             // 

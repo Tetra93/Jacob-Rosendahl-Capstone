@@ -9,15 +9,25 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
 {
     class DBCustomerUpdate
     {
-        public static void UpdateUser()
+        public static void UpdateUser(string specialty)
         {
             if (DBCustomerChecks.UserCheck(AddUpdateUser.UserID) == true)
             {
                 DBConnection.SqlString = $"UPDATE user " +
-                    $"SET name = \"{AddUpdateUser.CustomerName}\", specialty = {AddUpdateUser.CurrentSpecialty} lastUpdate = CURRENT_TIMESTAMP(), lastUpdateBy = \"{Login.UserName}\" " +
-                    $"WHERE userId = {DBCustomerChecks.LastCustomerID}";
+                    $"SET name = @name, specialty = @specialty, lastUpdate = CURRENT_TIMESTAMP(), lastUpdateBy = \"{Login.UserName}\" " +
+                    $"WHERE userId = {DBCustomerChecks.LastCustomerID}";                        
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
+                DBConnection.Cmd.Parameters.AddWithValue("@name", AddUpdateUser.CustomerName);
+                if (specialty == "")
+                {
+                    DBConnection.Cmd.Parameters.AddWithValue("@specialty", DBNull.Value);
+                }
+                else
+                {
+                    DBConnection.Cmd.Parameters.AddWithValue("@specialty", AddUpdateUser.CurrentSpecialty);
+                }
                 DBConnection.Cmd.ExecuteNonQuery();
+                
             }
         }
 

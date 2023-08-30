@@ -123,14 +123,35 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             Phone = phoneTextBox.Text;
         }
 
+        private void SpecialtyTextBox_TextChanged(object sender, EventArgs e)
+        {
+            CurrentSpecialty = specialtyTextBox.Text;
+        }
+
         private void SaveButton_Click(object sender, EventArgs e)
         {
             foreach (Control control in this.Controls)
             {
                 if (control is TextBox textBox)
                 {
+                    if (Role == "Admin")
+                    {
+                        if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+                        {
+                            MessageBox.Show($"{textBox.Name} cannot be empty.", "Empty fields", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
                     if (string.IsNullOrWhiteSpace(textBox.Text))
                     {
+                        if (textBox.Name == "specialtyTextBox" && Role == "Customer")
+                        {
+                            continue;
+                        }
                         MessageBox.Show($"{textBox.Name} cannot be empty.", "Empty fields", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
@@ -144,7 +165,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             }
             else if (this.Text == "Update User")
             {
-                DBCustomerUpdate.UpdateUser();
+                DBCustomerUpdate.UpdateUser(specialtyTextBox.Text);
                 DBCustomerUpdate.UpdateAddress();
             }
             ClearAll();
@@ -163,5 +184,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         {
             Users.users.Show();
         }
+
     }
 }
