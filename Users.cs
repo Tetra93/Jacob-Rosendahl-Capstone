@@ -192,10 +192,13 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         {
             if (dataGridView1.CurrentRow.Selected)
             {
+                int index = dataGridView1.SelectedRows[0].Index;
                 DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Customer?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
                 if (dialogResult == DialogResult.Yes)
                 {
-                    DBCustomerDelete.DeleteCustomer();
+                    Id = usersList[index].UserId;
+                    DBCustomerDelete.DeleteUser();
                     DBCustomerDelete.DeleteAddress();
                     User.PopulateUsers();
                     Customer.PopulateCustomers();
@@ -215,7 +218,20 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void Users_Shown(object sender, EventArgs e)
         {
-            dataGridView1.Refresh();
-        }        
+        }
+
+        private void Users_Activated(object sender, EventArgs e)
+        {
+                usersList.Clear();
+                if (Login.CurrentUser.AccessLevel == 1)
+                {
+                    usersList.AddRange(Admin.Admins);
+                }
+                usersList.AddRange(Customer.Customers);
+                usersList.AddRange(Consultant.Consultants);
+                usersList = usersList.OrderBy(u => u.UserId).ToList();
+
+                dataGridView1.DataSource = usersList;
+        }
     }
 }

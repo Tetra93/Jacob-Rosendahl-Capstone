@@ -10,12 +10,13 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
 {
     class DBCustomerDelete
     {
-        public static void DeleteCustomer()
+        public static void DeleteUser()
         {
             if (DBCustomerChecks.UserCheck(Users.Id) == true)
             {
                 DBConnection.SqlString = $"DELETE FROM appointment WHERE customerId = {Users.Id}; " +
-                    $"DELETE FROM customer WHERE addressId = {Users.Id}";
+                    $"DELETE FROM appointment WHERE consultantId = {Users.Id}; " +
+                    $"DELETE FROM user WHERE userId = {Users.Id}";
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
                 DBConnection.Cmd.ExecuteNonQuery();
                 Appointment.PopulateAppointments();

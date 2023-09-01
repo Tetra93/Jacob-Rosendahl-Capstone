@@ -14,6 +14,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 {
     public partial class AddUpdateUser : Form
     {
+        public static string Username = string.Empty;
         public static int UserID { set; get; }
         public static string CustomerName { set; get; }
         public static string Specialty { get; set; }
@@ -54,13 +55,20 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         {
             if (this.Text == "Add User")
             {
+
                 UserID = (Users.LastId + 1);
                 IDTextBox.Text = UserID.ToString();
+                usernameLabel.Visible = true;
+                usernameTextBox.Visible = true;
+                specialtyLabel.Visible = false;
+                specialtyTextBox.Visible = false;
                 canSave = false;
             }
             if (this.Text == "Update User")
             {
                 UserID = Users.Id;
+                usernameLabel.Visible = false;
+                usernameTextBox.Visible = false;
                 IDTextBox.Text = UserID.ToString();
                 nameTextBox.Text = Users.usersList[Users.Id -1].Name;
                 if (Role != "Admin")
@@ -78,19 +86,31 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 }
                 if (Role == "Admin")
                 {
+                    addressLabel.Visible = false;
                     addressTextBox.Visible = false;
+                    cityLabel.Visible = false;
                     cityTextBox.Visible = false;
+                    postalLabel.Visible = false;
                     postalTextBox.Visible = false;
+                    countryLabel.Visible = false;
                     countryTextBox.Visible = false;
+                    phoneLabel.Visible = false;
                     phoneTextBox.Visible = false;
+                    specialtyLabel.Visible = false;
                     specialtyTextBox.Visible = false;
                 }
                 else if (Role == "Customer")
                 {
+                    specialtyLabel.Visible = false;
                     specialtyTextBox.Visible = false;
                 }
                 canSave = true;
             }
+        }
+
+        private void UsernameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            Username = usernameTextBox.Text;
         }
 
         private void NameTextBox_TextChanged(object sender, EventArgs e)
@@ -152,6 +172,14 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                         {
                             continue;
                         }
+                        else if (textBox.Name == "specialtyTextBox" && this.Text == "Add User")
+                        {
+                            continue;
+                        }
+                        else if (textBox.Name == "usernameTextBox" && this.Text == "Update User")
+                        {
+                            continue;
+                        }
                         MessageBox.Show($"{textBox.Name} cannot be empty.", "Empty fields", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
@@ -160,6 +188,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             if (this.Text == "Add User")
             {
                 DBCustomerAdd.AddUser();
+                Task.Delay(1000).Wait();
                 DBCustomerAdd.AddAddress();
                 //DBCustomerAdd.CustomerAddressCorrect();
             }
@@ -168,10 +197,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 DBCustomerUpdate.UpdateUser(specialtyTextBox.Text);
                 DBCustomerUpdate.UpdateAddress();
             }
-            ClearAll();
-            this.Close();
             User.PopulateUsers();
             Customer.PopulateCustomers();
+            ClearAll();
+            this.Close();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

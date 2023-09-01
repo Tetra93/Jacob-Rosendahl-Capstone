@@ -39,6 +39,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                 while (DBConnection.Reader.Read())
                 {
                     userList.Add(DBConnection.Reader.GetString(0));
+                    
                     User DBUser = new User()
                     {
                         UserId = DBConnection.Reader.GetInt32(0),

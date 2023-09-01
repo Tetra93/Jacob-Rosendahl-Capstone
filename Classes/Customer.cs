@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Jacob_Rosendahl_C969_Scheduling_Application.Database;
 using MySql.Data.MySqlClient;
 
