@@ -23,12 +23,22 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             InitializeComponent();
             homeMenu = this;
             canClose = false;
-            welcomeLabel.Text = $"Welcome {Login.CurrentUser.Name}";
+            string firstName;
+            if (Login.CurrentUser.Name.Contains(" "))
+            {
+                firstName = Login.CurrentUser.Name.Substring(0, Login.CurrentUser.Name.IndexOf(" "));
+            }
+            else
+            {
+                firstName = Login.CurrentUser.Name;
+            }
+            welcomeLabel.Text = $"Welcome {firstName}";
         }
 
         private void CustomerButton_Click(object sender, EventArgs e)
         {
             Users customers = new Users();
+            
             customers.Show();
             homeMenu.Hide();
         }

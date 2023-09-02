@@ -188,7 +188,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             if (this.Text == "Add User")
             {
                 DBCustomerAdd.AddUser();
-                Task.Delay(1000).Wait();
+                //Task.Delay(1000).Wait();
                 DBCustomerAdd.AddAddress();
                 //DBCustomerAdd.CustomerAddressCorrect();
             }

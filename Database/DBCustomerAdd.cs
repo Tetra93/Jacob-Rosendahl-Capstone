@@ -28,8 +28,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
         {
             {
                 DBCustomerChecks.UserCheck(AddUpdateUser.UserID);
-                DBConnection.SqlString = $"INSERT INTO address (addressId, address, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)" +
-                    $" VALUES ({AddUpdateUser.UserID}, \"{AddUpdateUser.Address}\", \"{AddUpdateUser.PostalCode}\", \"{AddUpdateUser.Phone}\", CURRENT_TIMESTAMP(), \"{Login.UserName}\", CURRENT_TIMESTAMP(), \"{Login.UserName}\")";
+                DBConnection.SqlString = $"INSERT INTO address (addressId, address, city, country, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+                    $" VALUES ({AddUpdateUser.UserID}, \"{AddUpdateUser.Address}\", \"{AddUpdateUser.CurrentCity}\", \"{AddUpdateUser.CurrentCountry}\", \"{AddUpdateUser.PostalCode}\", \"{AddUpdateUser.Phone}\", CURRENT_TIMESTAMP(), \"{Login.UserName}\", CURRENT_TIMESTAMP(), \"{Login.UserName}\")";
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
                 DBConnection.Cmd.ExecuteNonQuery();
             }
