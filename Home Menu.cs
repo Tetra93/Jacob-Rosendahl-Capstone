@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jacob_Rosendahl_C969_Scheduling_Application.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,13 +34,68 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 firstName = Login.CurrentUser.Name;
             }
             welcomeLabel.Text = $"Welcome {firstName}";
+            if (Login.CurrentUser.AccessLevel == 3)
+            {
+                usersButton.Enabled = false;
+                reportsButton.Enabled = false;
+            }
         }
 
-        private void CustomerButton_Click(object sender, EventArgs e)
+        private void PersonalInfoButton_Click(object sender, EventArgs e)
         {
-            Users customers = new Users();
+            Users.usersList.Clear();
+            Users.usersList.Add(Login.CurrentUser);
+            Users.Id = Login.CurrentUser.UserId;
+            AddUpdateUser.fromHome = true;
+            AddUpdateUser.currentIndex = 0;
+            if (Login.CurrentUser.AccessLevel == 1)
+            {
+                AddUpdateUser.Role = "Admin";
+            }
+            else if (Login.CurrentUser.AccessLevel == 2)
+            {
+                foreach (Consultant consultant in Consultant.Consultants)
+                {
+                    if (consultant.UserId == Login.CurrentUser.UserId)
+                    {
+                        AddUpdateUser.CurrentAddress = consultant.Address;
+                        AddUpdateUser.CurrentCity = consultant.City;
+                        AddUpdateUser.CurrentCountry = consultant.Country;
+                        AddUpdateUser.CurrentPostalCode = consultant.PostalCode;
+                        AddUpdateUser.CurrentPhone = consultant.Phone;
+                        AddUpdateUser.CurrentSpecialty = consultant.Specialty;
+                        break;
+                    }
+                }
+                AddUpdateUser.Role = "Consultant";
+            }
+            else if (Login.CurrentUser.AccessLevel == 3)
+            {
+                foreach (Customer customer in Customer.Customers)
+                {
+                    if (customer.UserId == Login.CurrentUser.UserId)
+                    {
+
+                        AddUpdateUser.CurrentAddress = customer.Address;
+                        AddUpdateUser.CurrentCity = customer.City;
+                        AddUpdateUser.CurrentCountry = customer.Country;
+                        AddUpdateUser.CurrentPostalCode = customer.PostalCode;
+                        AddUpdateUser.CurrentPhone = customer.Phone;
+                    }
+                }
+                AddUpdateUser.Role = "Customer";
+            }
+            AddUpdateUser addUpdateUser = new AddUpdateUser();
+            addUpdateUser.Text = "Update User";
+            addUpdateUser.Show();
+            homeMenu.Hide();
+        }
+
+        private void UsersButton_Click(object sender, EventArgs e)
+        {
+            Users users = new Users();
             
-            customers.Show();
+            users.Show();
             homeMenu.Hide();
         }
 

@@ -143,7 +143,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.Text = "Users";
             this.Activated += new System.EventHandler(this.Users_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Users_FormClosing);
-            this.Shown += new System.EventHandler(this.Users_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jacob_Rosendahl_C969_Scheduling_Application.Classes;
+using MySqlX.XDevAPI.Relational;
 
 namespace Jacob_Rosendahl_C969_Scheduling_Application
 {
     public partial class Reports : Form
     {
+        public static List<string> specialties = new List<string>();
+
+        public static bool typeFound = false;
         public Reports()
         {
             InitializeComponent();
-            reportTypeBox.Items.Add("Number of appointments by type by month");
+            reportTypeBox.Items.Add("Appointment types by month");
+            reportTypeBox.Items.Add("Consultant appointments by month");
             reportTypeBox.Items.Add("Consultant schedules");
             reportTypeBox.Items.Add("Customer schedules");
         }
@@ -24,16 +30,110 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void ReportTypeBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = string.Empty;
-            if (reportTypeBox.SelectedItem.ToString() == "Number of appointments by type by month")
+            dataGridView1.DataSource = null;
+            if (reportTypeBox.SelectedItem.ToString() == "Appointment types by month")
             {
+                searchButton.Visible = false;
+                searchTextBox.Visible = false;
+                specialties.Clear();
+                dataGridView1.AutoGenerateColumns = false;
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Month", "Month");
+                foreach (Consultant consultant in Consultant.Consultants)
+                {
+                    if (!specialties.Contains(consultant.Specialty))
+                    {
+                        specialties.Add(consultant.Specialty);
+                        dataGridView1.Columns.Add(consultant.Specialty, consultant.Specialty);
+                        dataGridView1.Columns[consultant.Specialty].ValueType = typeof(int);
+                    }
+                }
+
+                dataGridView1.Columns.Add("Other", "Other");
+                for (int month = 0;month < DateTimeFormatInfo.CurrentInfo.MonthNames.Length - 1; month++)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+
+                    row.Cells.Add(new DataGridViewTextBoxCell { Value = DateTimeFormatInfo.CurrentInfo.MonthNames[month] });
+                    for (int i = 0; i < specialties.Count + 1; i++)
+                    {
+                        row.Cells.Add(new DataGridViewTextBoxCell { Value = 0 });
+                    }
+                    dataGridView1.Rows.Add(row);
+                }
+                foreach (Appointment appointment in Appointment.AllAppointments)
+                {
+                    typeFound = false;
+                    int appointmentMonth = appointment.Date.Month - 1;
+                    foreach (DataGridViewColumn column in dataGridView1.Columns)
+                    {
+                        if (column.Name == appointment.Type)
+                        {
+                            typeFound = true;
+                            int currentValue = Convert.ToInt32(dataGridView1.Rows[appointmentMonth].Cells[column.Name].Value);
+                            currentValue++;
+                            dataGridView1.Rows[appointmentMonth].Cells[column.Name].Value = currentValue;
+                        }
+                    }
+                    if (!typeFound)
+                    {
+                        int currentValue = Convert.ToInt32(dataGridView1.Rows[appointmentMonth].Cells["Other"].Value);
+                        currentValue++;
+                        dataGridView1.Rows[appointmentMonth].Cells["Other"].Value = currentValue;
+                    }
+                }
+
                 peopleListBox.Visible = false;
-                AppointmentTypesByMonth.CountMonths();
-                dataGridView1.DataSource = AppointmentTypesByMonth.appointmentMonthsBindingList;
-                dataGridView1.Refresh();
             }
+            else if (reportTypeBox.SelectedItem.ToString() == "Consultant appointments by month")
+            {
+                dataGridView1.DataSource = null;
+                dataGridView1.Rows.Clear();
+                dataGridView1.Columns.Clear();
+                searchButton.Visible = false;
+                searchTextBox.Visible = false;
+                specialties.Clear();
+                dataGridView1.AutoGenerateColumns = false;
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Month", "Month");
+                foreach (Consultant consultant in Consultant.Consultants)
+                {
+                    dataGridView1.Columns.Add(consultant.Name, consultant.Name);
+                }
+                for (int month = 0; month < DateTimeFormatInfo.CurrentInfo.MonthNames.Length - 1; month++)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+
+                    row.Cells.Add(new DataGridViewTextBoxCell { Value = DateTimeFormatInfo.CurrentInfo.MonthNames[month] });
+                    for (int i = 0; i < Consultant.Consultants.Count; i++)
+                    {
+                        row.Cells.Add(new DataGridViewTextBoxCell { Value = 0 });
+                    }
+                    dataGridView1.Rows.Add(row);
+                }
+                foreach (Appointment appointment in Appointment.AllAppointments)
+                {
+                    int appointmentMonth = appointment.Date.Month - 1;
+                    foreach (DataGridViewColumn column in dataGridView1.Columns)
+                    {
+                        if (column.Name == appointment.Consultant)
+                        {
+                            int currentValue = Convert.ToInt32(dataGridView1.Rows[appointmentMonth].Cells[column.Name].Value);
+                            currentValue++;
+                            dataGridView1.Rows[appointmentMonth].Cells[column.Name].Value = currentValue;
+                        }
+                    }
+                }
+
+                peopleListBox.Visible = false;
+            }
+
             else if (reportTypeBox.SelectedItem.ToString() == "Consultant schedules")
             {
+                searchButton.Visible = true;
+                searchTextBox.Visible = true;
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.Columns.Clear();
                 peopleListBox.Items.Clear();
                 foreach (Consultant consultant in Consultant.Consultants)
                 {
@@ -43,6 +143,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             }
             if (reportTypeBox.SelectedItem.ToString() == "Customer schedules")
             {
+                searchButton.Visible = true;
+                searchTextBox.Visible = true;
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.Columns.Clear();
                 peopleListBox.Items.Clear();
                 foreach (Customer customer in Customer.Customers)
                 {
@@ -78,16 +182,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             string searchValue = searchTextBox.Text.ToString();
             if (!string.IsNullOrWhiteSpace(searchValue))
             {
-                if (dataGridView1.DataSource == AppointmentTypesByMonth.appointmentMonthsBindingList)
-                    for (int i = 0; i < AppointmentTypesByMonth.appointmentMonthsBindingList.Count; i++)
-                    {
-                        if (AppointmentTypesByMonth.appointmentMonthsBindingList[i].ToString().ToUpper().Contains(searchValue.ToUpper()))
-                        {
-                            searchCount++;
-                            dataGridView1.Rows[i].Selected = true;
-                        }
-                    }
-                else if (dataGridView1.DataSource == Appointment.AppointmentsUserFiltered)
+                if (dataGridView1.DataSource == Appointment.AppointmentsUserFiltered)
                 {
                     for (int i = 0; i < Appointment.AppointmentsUserFiltered.Count; i++)
                     {

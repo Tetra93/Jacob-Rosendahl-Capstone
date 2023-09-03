@@ -88,7 +88,6 @@
   <ItemGroup>
     <Compile Include="Classes\Admin.cs" />
     <Compile Include="Classes\Appointment.cs" />
-    <Compile Include="Classes\AppointmentTypesByMonth.cs" />
     <Compile Include="Classes\Consultant.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\Customer.cs" />

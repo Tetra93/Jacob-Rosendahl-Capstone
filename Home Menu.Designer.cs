@@ -29,25 +29,26 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         /// </summary>
         private void InitializeComponent()
         {
-            this.customerButton = new System.Windows.Forms.Button();
+            this.usersButton = new System.Windows.Forms.Button();
             this.appointmentButton = new System.Windows.Forms.Button();
             this.reportsButton = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.personalInfoButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // customerButton
+            // usersButton
             // 
-            this.customerButton.Location = new System.Drawing.Point(73, 88);
-            this.customerButton.Name = "customerButton";
-            this.customerButton.Size = new System.Drawing.Size(120, 35);
-            this.customerButton.TabIndex = 0;
-            this.customerButton.Text = "&Customer Information";
-            this.customerButton.UseVisualStyleBackColor = true;
-            this.customerButton.Click += new System.EventHandler(this.CustomerButton_Click);
+            this.usersButton.Location = new System.Drawing.Point(73, 88);
+            this.usersButton.Name = "usersButton";
+            this.usersButton.Size = new System.Drawing.Size(120, 35);
+            this.usersButton.TabIndex = 0;
+            this.usersButton.Text = "&Users List";
+            this.usersButton.UseVisualStyleBackColor = true;
+            this.usersButton.Click += new System.EventHandler(this.UsersButton_Click);
             // 
             // appointmentButton
             // 
@@ -112,18 +113,29 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.tableLayoutPanel1.Size = new System.Drawing.Size(244, 30);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
+            // personalInfoButton
+            // 
+            this.personalInfoButton.Location = new System.Drawing.Point(73, 47);
+            this.personalInfoButton.Name = "personalInfoButton";
+            this.personalInfoButton.Size = new System.Drawing.Size(120, 35);
+            this.personalInfoButton.TabIndex = 7;
+            this.personalInfoButton.Text = "&Personal Information";
+            this.personalInfoButton.UseVisualStyleBackColor = true;
+            this.personalInfoButton.Click += new System.EventHandler(this.PersonalInfoButton_Click);
+            // 
             // HomeMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(268, 311);
+            this.Controls.Add(this.personalInfoButton);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.reportsButton);
             this.Controls.Add(this.appointmentButton);
-            this.Controls.Add(this.customerButton);
+            this.Controls.Add(this.usersButton);
             this.Name = "HomeMenu";
             this.Text = "Main Menu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HomeMenu_FormClosing);
@@ -135,12 +147,13 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         #endregion
 
-        private System.Windows.Forms.Button customerButton;
+        private System.Windows.Forms.Button usersButton;
         private System.Windows.Forms.Button appointmentButton;
         private System.Windows.Forms.Button reportsButton;
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button personalInfoButton;
     }
 }

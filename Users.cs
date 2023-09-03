@@ -166,6 +166,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+            AddUpdateUser.fromHome = false;
             AddUpdateUser addUpdateUser = new AddUpdateUser();
             addUpdateUser.Text = "Add User";
             addUpdateUser.Show();
@@ -174,6 +175,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
+            AddUpdateUser.fromHome = false;
             Id = int.Parse(dataGridView1.CurrentRow.Cells["UserID"].Value.ToString());
             AddUpdateUser.Role = dataGridView1.CurrentRow.Cells[1].Value.ToString();
             AddUpdateUser.CurrentSpecialty = dataGridView1.CurrentRow.Cells[3].Value.ToString();
@@ -183,6 +185,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             AddUpdateUser.CurrentPhone = dataGridView1.CurrentRow.Cells[7].Value.ToString();
             AddUpdateUser.CurrentPostalCode = dataGridView1.CurrentRow.Cells[8].Value.ToString();
             AddUpdateUser addUpdateUser = new AddUpdateUser();
+            AddUpdateUser.currentIndex = dataGridView1.SelectedRows[0].Index;
             addUpdateUser.Text = "Update User";
             addUpdateUser.Show();
             this.Hide();
@@ -214,10 +217,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         private void Users_FormClosing(object sender, FormClosingEventArgs e)
         {
             HomeMenu.homeMenu.Show();
-        }
-
-        private void Users_Shown(object sender, EventArgs e)
-        {
         }
 
         private void Users_Activated(object sender, EventArgs e)

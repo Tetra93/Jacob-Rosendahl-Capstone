@@ -65,9 +65,9 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(35, 90);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 13);
+            this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Customer Name";
+            this.label2.Text = "Name";
             // 
             // IDTextBox
             // 

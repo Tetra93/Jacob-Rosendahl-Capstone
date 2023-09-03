@@ -14,7 +14,11 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 {
     public partial class AddUpdateUser : Form
     {
+        public static bool fromHome = false;
+
         public static string Username = string.Empty;
+
+        public static int currentIndex = 0;
         public static int UserID { set; get; }
         public static string CustomerName { set; get; }
         public static string Specialty { get; set; }
@@ -70,7 +74,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 usernameLabel.Visible = false;
                 usernameTextBox.Visible = false;
                 IDTextBox.Text = UserID.ToString();
-                nameTextBox.Text = Users.usersList[Users.Id -1].Name;
+                nameTextBox.Text = Users.usersList[currentIndex].Name;
                 if (Role != "Admin")
                 {
                     addressTextBox.Text = CurrentAddress;
@@ -188,7 +192,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             if (this.Text == "Add User")
             {
                 DBCustomerAdd.AddUser();
-                //Task.Delay(1000).Wait();
                 DBCustomerAdd.AddAddress();
                 //DBCustomerAdd.CustomerAddressCorrect();
             }
@@ -211,7 +214,14 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void AddUpdateCustomer_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Users.users.Show();
+            if (fromHome == true)
+            {
+                HomeMenu.homeMenu.Show();
+            }
+            else
+            {
+                Users.users.Show();
+            }
         }
 
     }
