@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +22,15 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         public Reports()
         {
             InitializeComponent();
+            reportTypeBox.Items.Clear();
             reportTypeBox.Items.Add("Appointment types by month");
             reportTypeBox.Items.Add("Consultant appointments by month");
             reportTypeBox.Items.Add("Consultant schedules");
             reportTypeBox.Items.Add("Customer schedules");
+            if (Login.CurrentUser.AccessLevel == 1)
+            {
+                reportTypeBox.Items.Add("Login attempts");
+            }
         }
 
 
@@ -141,7 +147,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 }
                 peopleListBox.Visible = true;
             }
-            if (reportTypeBox.SelectedItem.ToString() == "Customer schedules")
+            else if (reportTypeBox.SelectedItem.ToString() == "Customer schedules")
             {
                 searchButton.Visible = true;
                 searchTextBox.Visible = true;
@@ -153,6 +159,13 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                     peopleListBox.Items.Add(customer.Name);
                 }
                 peopleListBox.Visible = true;
+            }
+            else if (reportTypeBox.SelectedItem.ToString() == "Login attempts")
+            {
+                using (StreamReader reader = new StreamReader("Logins.txt"))
+                {
+
+                }              
             }
         }
 

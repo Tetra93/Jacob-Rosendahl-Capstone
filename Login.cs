@@ -74,6 +74,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             User.UserLogin();
             if (loginSuccessful == true)
             {
+                TrimLogFile();
                 Appointment.UserFilter(UserName);
                 appointmentSoon = Appointment.TimeCheck();
                 HomeMenu homeMenu = new HomeMenu();
@@ -88,7 +89,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 using (StreamWriter logs = new StreamWriter(fileName, true))
                 {
-                    logs.WriteLine($"{DateTime.Now} {TimeZone.CurrentTimeZone.StandardName}: Unsuccessful login attempt");
+                    logs.WriteLine($"{DateTime.Now} {TimeZone.CurrentTimeZone.StandardName}: Unsuccessful login attempt by {UserName}");
                 }
                 if (Program.language == "es")
                 {
@@ -97,6 +98,32 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 else
                 {
                     MessageBox.Show("Invalid username and password combination", "Invalid login", MessageBoxButtons.OK);
+                }
+            }
+        }
+
+        private void TrimLogFile()
+        {
+            int maxLines = 49;
+            List<string> lines = new List<string>();
+
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    lines.Add(line);
+                }
+            }
+            if (lines.Count > maxLines)
+            {
+                lines.RemoveRange(0, lines.Count - maxLines);
+            }
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                foreach (string trimmedLines  in lines)
+                {
+                    writer.WriteLine(trimmedLines);
                 }
             }
         }
