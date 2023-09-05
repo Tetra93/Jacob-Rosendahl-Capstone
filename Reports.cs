@@ -162,9 +162,40 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             }
             else if (reportTypeBox.SelectedItem.ToString() == "Login attempts")
             {
+                dataGridView1.AutoGenerateColumns = false;
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("Timestamp", "Timestamp");
+                dataGridView1.Columns.Add("Successful", "Successful");
+                dataGridView1.Columns.Add("Username", "Username");
                 using (StreamReader reader = new StreamReader("Logins.txt"))
                 {
+                    string timestamp = string.Empty;
+                    string username = string.Empty;
+                    string successful = string.Empty;
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        int splitIndex = line.IndexOf(":", line.IndexOf("Time"));
+                        string[] halves = new string[] { line.Substring(0, splitIndex), line.Substring(splitIndex + 1) };
+                        timestamp = halves[0].Trim();
+                        if (halves[1].Contains("Successful login by"))
+                        {
+                            successful = "Yes";
+                            username = halves[1].Replace("Successful login by", "").Trim();
+                        }
+                        else if (halves[1].Contains("Unsuccessful login attempt by"))
+                        {
+                            successful = "No";
+                            username = halves[1].Replace("Unsuccessful login attempt by", "").Trim();
+                        }
 
+                        DataGridViewRow row = new DataGridViewRow();
+                        dataGridView1.Rows.Add(row);
+                        int lastIndex = dataGridView1.Rows.Count - 1;
+                        dataGridView1.Rows[lastIndex].Cells["Timestamp"].Value = timestamp;
+                        dataGridView1.Rows[lastIndex].Cells["Successful"].Value = successful;
+                        dataGridView1.Rows[lastIndex].Cells["Username"].Value = username; 
+                    }
                 }              
             }
         }

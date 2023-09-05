@@ -128,8 +128,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             }
         }
 
-
-
         private void UsernameTextBox_TextChanged(object sender, EventArgs e)
         {
             UserName = usernameTextBox.Text.ToString();
