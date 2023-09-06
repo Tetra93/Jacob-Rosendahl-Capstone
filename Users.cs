@@ -196,11 +196,16 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             if (dataGridView1.CurrentRow.Selected)
             {
                 int index = dataGridView1.SelectedRows[0].Index;
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Customer?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete {dataGridView1.SelectedRows[0].Cells[2].Value}?", $"Delete {dataGridView1.SelectedRows[0].Cells[2].Value}?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Yes)
                 {
                     Id = usersList[index].UserId;
+                    if (Id == Login.CurrentUser.UserId)
+                    {
+                        MessageBox.Show("You cannot delete your own account", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     DBCustomerDelete.DeleteUser();
                     DBCustomerDelete.DeleteAddress();
                     User.PopulateUsers();

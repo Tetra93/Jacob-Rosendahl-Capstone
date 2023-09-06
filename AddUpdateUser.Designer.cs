@@ -49,6 +49,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.specialtyTextBox = new System.Windows.Forms.TextBox();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
+            this.roleComboBox = new System.Windows.Forms.ComboBox();
+            this.roleLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -225,12 +227,35 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.usernameTextBox.TabIndex = 0;
             this.usernameTextBox.TextChanged += new System.EventHandler(this.UsernameTextBox_TextChanged);
             // 
+            // roleComboBox
+            // 
+            this.roleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.roleComboBox.FormattingEnabled = true;
+            this.roleComboBox.Location = new System.Drawing.Point(135, 7);
+            this.roleComboBox.Name = "roleComboBox";
+            this.roleComboBox.Size = new System.Drawing.Size(100, 21);
+            this.roleComboBox.TabIndex = 17;
+            this.roleComboBox.Visible = false;
+            this.roleComboBox.SelectedIndexChanged += new System.EventHandler(this.RoleComboBox_SelectedIndexChanged);
+            // 
+            // roleLabel
+            // 
+            this.roleLabel.AutoSize = true;
+            this.roleLabel.Location = new System.Drawing.Point(35, 10);
+            this.roleLabel.Name = "roleLabel";
+            this.roleLabel.Size = new System.Drawing.Size(54, 13);
+            this.roleLabel.TabIndex = 18;
+            this.roleLabel.Text = "User Role";
+            this.roleLabel.Visible = false;
+            // 
             // AddUpdateUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(266, 330);
+            this.Controls.Add(this.roleLabel);
+            this.Controls.Add(this.roleComboBox);
             this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.specialtyLabel);
@@ -252,7 +277,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AddUpdateUser";
-            this.Text = "Add Customer";
+            this.Text = "Add User";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddUpdateCustomer_FormClosed);
             this.Load += new System.EventHandler(this.AddModifyCustomer_Load);
             this.ResumeLayout(false);
@@ -281,5 +306,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         private System.Windows.Forms.TextBox specialtyTextBox;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.TextBox usernameTextBox;
+        private System.Windows.Forms.ComboBox roleComboBox;
+        private System.Windows.Forms.Label roleLabel;
     }
 }

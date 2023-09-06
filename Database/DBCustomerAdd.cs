@@ -15,9 +15,24 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
             if (DBCustomerChecks.UserCheck(AddUpdateUser.UserID) == false)
             {
                
-                DBConnection.SqlString = $"INSERT INTO user (userId, userName, name, createdBy, lastUpdateBy)" +
-                    $" VALUES ({AddUpdateUser.UserID}, \"{AddUpdateUser.Username}\", \"{AddUpdateUser.CustomerName}\", \"{Login.UserName}\", \"{Login.UserName}\")";
+                DBConnection.SqlString = $"INSERT INTO user (userId, userName, name, specialty, accessLevel, createdBy, lastUpdateBy)" +
+                    $" VALUES ({AddUpdateUser.UserID}, \"{AddUpdateUser.Username}\", \"{AddUpdateUser.Name2}\", @specialty, @accessLevel, \"{Login.UserName}\", \"{Login.UserName}\")";
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
+                if (AddUpdateUser.Role == "Consultant")
+                {
+                    DBConnection.Cmd.Parameters.AddWithValue("@specialty", AddUpdateUser.CurrentSpecialty);
+                    DBConnection.Cmd.Parameters.AddWithValue("@accessLevel", 2);
+                }
+                else if (AddUpdateUser.Role == "Admin")
+                {
+                    DBConnection.Cmd.Parameters.AddWithValue("@specialty", DBNull.Value);
+                    DBConnection.Cmd.Parameters.AddWithValue("@accessLevel", 1);
+                }
+                else
+                {
+                    DBConnection.Cmd.Parameters.AddWithValue("@specialty", DBNull.Value);
+                    DBConnection.Cmd.Parameters.AddWithValue("@accessLevel", 3);
+                }
                 DBConnection.Cmd.ExecuteNonQuery();
             }
         }

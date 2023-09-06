@@ -37,55 +37,56 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.personalInfoButton = new System.Windows.Forms.Button();
+            this.changePasswordButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // usersButton
             // 
-            this.usersButton.Location = new System.Drawing.Point(73, 88);
+            this.usersButton.Location = new System.Drawing.Point(73, 129);
             this.usersButton.Name = "usersButton";
             this.usersButton.Size = new System.Drawing.Size(120, 35);
-            this.usersButton.TabIndex = 0;
+            this.usersButton.TabIndex = 2;
             this.usersButton.Text = "&Users List";
             this.usersButton.UseVisualStyleBackColor = true;
             this.usersButton.Click += new System.EventHandler(this.UsersButton_Click);
             // 
             // appointmentButton
             // 
-            this.appointmentButton.Location = new System.Drawing.Point(73, 129);
+            this.appointmentButton.Location = new System.Drawing.Point(73, 170);
             this.appointmentButton.Name = "appointmentButton";
             this.appointmentButton.Size = new System.Drawing.Size(120, 35);
-            this.appointmentButton.TabIndex = 1;
+            this.appointmentButton.TabIndex = 3;
             this.appointmentButton.Text = "&Appointments";
             this.appointmentButton.UseVisualStyleBackColor = true;
             this.appointmentButton.Click += new System.EventHandler(this.AppointmentButton_Click);
             // 
             // reportsButton
             // 
-            this.reportsButton.Location = new System.Drawing.Point(73, 170);
+            this.reportsButton.Location = new System.Drawing.Point(73, 211);
             this.reportsButton.Name = "reportsButton";
             this.reportsButton.Size = new System.Drawing.Size(120, 35);
-            this.reportsButton.TabIndex = 2;
+            this.reportsButton.TabIndex = 4;
             this.reportsButton.Text = "Generate &Reports";
             this.reportsButton.UseVisualStyleBackColor = true;
             this.reportsButton.Click += new System.EventHandler(this.ReportsButton_Click);
             // 
             // logoutButton
             // 
-            this.logoutButton.Location = new System.Drawing.Point(73, 211);
+            this.logoutButton.Location = new System.Drawing.Point(73, 252);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(120, 35);
-            this.logoutButton.TabIndex = 3;
+            this.logoutButton.TabIndex = 5;
             this.logoutButton.Text = "&Log Out";
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(73, 252);
+            this.exitButton.Location = new System.Drawing.Point(73, 293);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(120, 35);
-            this.exitButton.TabIndex = 4;
+            this.exitButton.TabIndex = 6;
             this.exitButton.Text = "E&xit";
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);
@@ -118,17 +119,28 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.personalInfoButton.Location = new System.Drawing.Point(73, 47);
             this.personalInfoButton.Name = "personalInfoButton";
             this.personalInfoButton.Size = new System.Drawing.Size(120, 35);
-            this.personalInfoButton.TabIndex = 7;
+            this.personalInfoButton.TabIndex = 0;
             this.personalInfoButton.Text = "&Personal Information";
             this.personalInfoButton.UseVisualStyleBackColor = true;
             this.personalInfoButton.Click += new System.EventHandler(this.PersonalInfoButton_Click);
+            // 
+            // changePasswordButton
+            // 
+            this.changePasswordButton.Location = new System.Drawing.Point(73, 88);
+            this.changePasswordButton.Name = "changePasswordButton";
+            this.changePasswordButton.Size = new System.Drawing.Size(120, 35);
+            this.changePasswordButton.TabIndex = 1;
+            this.changePasswordButton.Text = "Change &Password";
+            this.changePasswordButton.UseVisualStyleBackColor = true;
+            this.changePasswordButton.Click += new System.EventHandler(this.ChangePasswordButton_Click);
             // 
             // HomeMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(268, 311);
+            this.ClientSize = new System.Drawing.Size(268, 357);
+            this.Controls.Add(this.changePasswordButton);
             this.Controls.Add(this.personalInfoButton);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.exitButton);
@@ -155,5 +167,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button personalInfoButton;
+        private System.Windows.Forms.Button changePasswordButton;
     }
 }

@@ -14,10 +14,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
             if (DBCustomerChecks.UserCheck(AddUpdateUser.UserID) == true)
             {
                 DBConnection.SqlString = $"UPDATE user " +
-                    $"SET name = @name, specialty = @specialty, lastUpdate = CURRENT_TIMESTAMP(), lastUpdateBy = \"{Login.UserName}\" " +
+                    $"SET name = @name, specialty = @specialty, accessLevel = @accessLevel, lastUpdate = CURRENT_TIMESTAMP(), lastUpdateBy = \"{Login.UserName}\" " +
                     $"WHERE userId = {DBCustomerChecks.LastCustomerID}";                        
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
-                DBConnection.Cmd.Parameters.AddWithValue("@name", AddUpdateUser.CustomerName);
+                DBConnection.Cmd.Parameters.AddWithValue("@name", AddUpdateUser.Name2);
                 if (specialty == "")
                 {
                     DBConnection.Cmd.Parameters.AddWithValue("@specialty", DBNull.Value);
@@ -25,6 +25,19 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
                 else
                 {
                     DBConnection.Cmd.Parameters.AddWithValue("@specialty", AddUpdateUser.CurrentSpecialty);
+
+                }
+                if (AddUpdateUser.Role == "Admin")
+                {
+                    DBConnection.Cmd.Parameters.AddWithValue("@accessLevel", 1);
+                }
+                else if (AddUpdateUser.Role == "Consultant")
+                {
+                    DBConnection.Cmd.Parameters.AddWithValue("@accessLevel", 2);
+                }
+                else
+                {
+                    DBConnection.Cmd.Parameters.AddWithValue("@accessLevel", 3);
                 }
                 DBConnection.Cmd.ExecuteNonQuery();
                 
@@ -41,6 +54,15 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
                 DBConnection.Cmd.ExecuteNonQuery();
             }
+        }
+
+        public static void UpdatePassword(string password)
+        {
+            DBConnection.SqlString = $"UPDATE user " +
+                $"SET password = \"{password}\", lastUpdate = CURRENT_TIMESTAMP(), lastUpdateBy = \"{Login.UserName}\" " +
+                $"WHERE userId = {Login.CurrentUser.UserId}";
+            DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
+            DBConnection.Cmd.ExecuteNonQuery();
         }
     }
 }

@@ -91,6 +91,13 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             homeMenu.Hide();
         }
 
+        private void ChangePasswordButton_Click(object sender, EventArgs e)
+        {
+            ChangePassword changePassword = new ChangePassword();
+            homeMenu.Hide();
+            changePassword.Show();
+        }
+
         private void UsersButton_Click(object sender, EventArgs e)
         {
             Users users = new Users();
