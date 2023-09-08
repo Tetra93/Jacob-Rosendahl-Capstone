@@ -17,7 +17,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
     {
         public static Appointments appointments;
 
-        public static int CurrentID { set; get; }
+        public static int CurrentIndex { set; get; }
 
         public static int AppointmentID { set; get; }
 
@@ -290,7 +290,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 }
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = Appointment.AppointmentsDateFiltered;
-                dataGridView1.Refresh();
             }
             catch (Exception ex)
             {
@@ -316,7 +315,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 if (dataGridView1.SelectedRows.Count == 1)
                 {
-                    CurrentID = dataGridView1.CurrentRow.Index;
+                    CurrentIndex = dataGridView1.CurrentRow.Index;
                     AppointmentID = int.Parse(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString());
                     updateButton.Enabled = true;
                     deleteButton.Enabled = true;
@@ -337,6 +336,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
         private void NewButton_Click(object sender, EventArgs e)
         {
             AddUpdateAppointments addUpdateAppointments = new AddUpdateAppointments();
+            DBAppointment.AppointmentID = Appointment.AllAppointments.Last().AppointmentID;
             addUpdateAppointments.Text = "New Appointment";
             addUpdateAppointments.Show();
             this.Hide();
@@ -357,6 +357,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 DBAppointment.DeleteAppointment();
                 Appointment.PopulateAppointments();
+                Appointment.UserFilter(Login.CurrentUser.Name);
+                dataGridView1.DataSource = Appointment.AppointmentsUserFiltered;
             }
         }
 
@@ -370,10 +372,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             HomeMenu.homeMenu.Show();
         }
 
-        private void Appointments_Shown(object sender, EventArgs e)
+        private void Appointments_Activated(object sender, EventArgs e)
         {
-            dataGridView1.Refresh();
+            Appointment.UserFilter(Login.CurrentUser.Name);
+            dataGridView1.DataSource = Appointment.AppointmentsUserFiltered;
         }
-
     }
 }
