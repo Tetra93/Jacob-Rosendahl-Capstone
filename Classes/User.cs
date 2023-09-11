@@ -10,8 +10,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 {
     public class User
     {
-        //public static User user = new User();
-
         public int UserId { set; get; }
 
         public string UserName { set; get; }
@@ -86,6 +84,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
                         AccessLevel = DBConnection.Reader.GetInt32(3)
                     };
                     allUsers.Add(DBUser);
+                    Users.LastId = 1;
                     if (DBUser.UserId > Users.LastId)
                     {
                         Users.LastId = DBUser.UserId;

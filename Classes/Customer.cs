@@ -12,12 +12,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
 {
     public class Customer : User
     {
-        //public static Customer customer = new Customer();
-
-        //public int UserId { set; get; }
-
-        //public string Name { set; get; }
-
         public string Address { set; get; }
 
         public string Phone { set; get; }

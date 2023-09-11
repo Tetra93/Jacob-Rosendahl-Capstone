@@ -42,6 +42,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             }
             allRadio.Checked = true;
             appointments = this;
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
         }
 
         private void AllRadio_CheckedChanged(object sender, EventArgs e)
@@ -96,7 +100,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                         }
                 }
                 dataGridView1.DataSource = Appointment.AppointmentsDateFiltered;
-                dataGridView1.Refresh();
             }
         }
 
@@ -134,7 +137,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                         }
                 }
                 dataGridView1.DataSource = Appointment.AppointmentsDateFiltered;
-                dataGridView1.Refresh();
             }
         }
 
@@ -357,8 +359,36 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 DBAppointment.DeleteAppointment();
                 Appointment.PopulateAppointments();
-                Appointment.UserFilter(Login.CurrentUser.Name);
-                dataGridView1.DataSource = Appointment.AppointmentsUserFiltered;
+                if (Login.CurrentUser.AccessLevel == 2)
+                {
+                    Appointment.UserFilter(Login.CurrentUser.Name);
+                }
+                if (allRadio.Checked == true)
+                {
+                    if (Login.CurrentUser.AccessLevel == 1)
+                    {
+                        dataGridView1.DataSource = Appointment.AllAppointments;
+                    }
+                    else
+                    {
+                        Appointment.UserFilter(Login.CurrentUser.Name);
+                        dataGridView1.DataSource = Appointment.AppointmentsUserFiltered;
+                    }
+                }
+
+                else if (currentWeekRadio.Checked == true)
+                {
+                    CurrentWeekRadio_CheckedChanged(null, null);
+                }
+                else if (currentMonthRadio.Checked == true)
+                {
+                    CurrentMonthRadio_CheckedChanged(null, null);
+                }
+                else if (otherRadio.Checked == true)
+                {
+                    OtherRadio_CheckedChanged(null, null);
+                }                
+                
             }
         }
 
@@ -374,8 +404,39 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void Appointments_Activated(object sender, EventArgs e)
         {
-            Appointment.UserFilter(Login.CurrentUser.Name);
-            dataGridView1.DataSource = Appointment.AppointmentsUserFiltered;
+            if (this.Visible == true)
+            {
+                return;
+            }
+            if (Login.CurrentUser.AccessLevel == 2)
+            {
+                Appointment.UserFilter(Login.CurrentUser.Name);
+            }
+            if (allRadio.Checked == true)
+            {
+                if (Login.CurrentUser.AccessLevel == 1)
+                {
+                    dataGridView1.DataSource = Appointment.AllAppointments;
+                }
+                else
+                {
+                    Appointment.UserFilter(Login.CurrentUser.Name);
+                    dataGridView1.DataSource = Appointment.AppointmentsUserFiltered;
+                }
+            }
+
+            else if (currentWeekRadio.Checked == true)
+            {
+                CurrentWeekRadio_CheckedChanged(null, null);
+            }
+            else if (currentMonthRadio.Checked == true)
+            {
+                CurrentMonthRadio_CheckedChanged(null, null);
+            }
+            else if (otherRadio.Checked == true)
+            {
+                OtherRadio_CheckedChanged(null, null);
+            }
         }
     }
 }

@@ -43,13 +43,25 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             {
                 usersList.AddRange(Admin.Admins);
             }
-            usersList.AddRange(Customer.Customers);
+            if (Login.CurrentUser.AccessLevel != 3)
+            {
+                usersList.AddRange(Customer.Customers);
+            }
             usersList.AddRange(Consultant.Consultants);
             usersList = usersList.OrderBy(u => u.UserId).ToList();
 
             dataGridView1.DataSource = usersList;
-            users = this;
-            
+            if (Login.CurrentUser.AccessLevel == 3)
+            {
+                addButton.Enabled = false;
+                updateButton.Enabled = false;
+                deleteButton.Enabled = false;
+            }
+            else
+            {
+                addButton.Enabled = true;
+            }
+            users = this;            
         }
 
         private void DataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -139,12 +151,34 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            if (Login.CurrentUser.AccessLevel == 3)
+            {
+                return;
+            }
             if (dataGridView1.CurrentRow != null)
             {
                 if (dataGridView1.SelectedRows.Count == 1)
                 {
                     updateButton.Enabled = true;
-                    deleteButton.Enabled = true;
+                    if (dataGridView1.SelectedRows[0].Cells[1].Value != null)
+                    {
+                        string userRole = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+
+                        if (Login.CurrentUser.AccessLevel == 2 && userRole == "Consultant")
+                        {
+                            updateButton.Enabled = false;
+                            deleteButton.Enabled = false;
+                        }
+                        else
+                        {
+                            updateButton.Enabled = true;
+                            deleteButton.Enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
                 else
                 {
@@ -210,6 +244,20 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                     DBCustomerDelete.DeleteAddress();
                     User.PopulateUsers();
                     Customer.PopulateCustomers();
+
+                    usersList.Clear();
+                    if (Login.CurrentUser.AccessLevel == 1)
+                    {
+                        usersList.AddRange(Admin.Admins);
+                    }
+                    if (Login.CurrentUser.AccessLevel != 3)
+                    {
+                        usersList.AddRange(Customer.Customers);
+                    }
+                    usersList.AddRange(Consultant.Consultants);
+                    usersList = usersList.OrderBy(u => u.UserId).ToList();
+
+                    dataGridView1.DataSource = usersList;
                 }
             }
         }
@@ -226,16 +274,19 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void Users_Activated(object sender, EventArgs e)
         {
-                usersList.Clear();
-                if (Login.CurrentUser.AccessLevel == 1)
-                {
-                    usersList.AddRange(Admin.Admins);
-                }
+            usersList.Clear();
+            if (Login.CurrentUser.AccessLevel == 1)
+            {
+                usersList.AddRange(Admin.Admins);
+            }
+            if (Login.CurrentUser.AccessLevel != 3)
+            {
                 usersList.AddRange(Customer.Customers);
-                usersList.AddRange(Consultant.Consultants);
-                usersList = usersList.OrderBy(u => u.UserId).ToList();
+            }
+            usersList.AddRange(Consultant.Consultants);
+            usersList = usersList.OrderBy(u => u.UserId).ToList();
 
-                dataGridView1.DataSource = usersList;
+            dataGridView1.DataSource = usersList;
         }
     }
 }

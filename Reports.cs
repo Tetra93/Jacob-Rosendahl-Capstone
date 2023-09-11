@@ -196,7 +196,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                         dataGridView1.Rows[lastIndex].Cells["Successful"].Value = successful;
                         dataGridView1.Rows[lastIndex].Cells["Username"].Value = username; 
                     }
-                }              
+                }
+                peopleListBox.Visible = false;
             }
         }
 

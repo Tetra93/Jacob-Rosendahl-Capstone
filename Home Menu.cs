@@ -36,7 +36,6 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             welcomeLabel.Text = $"Welcome {firstName}";
             if (Login.CurrentUser.AccessLevel == 3)
             {
-                usersButton.Enabled = false;
                 reportsButton.Enabled = false;
             }
         }
