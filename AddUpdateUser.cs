@@ -273,7 +273,6 @@ namespace Jacob_Rosendahl_Appointed_Program
             {
                 DBCustomerAdd.AddUser();
                 DBCustomerAdd.AddAddress();
-                //DBCustomerAdd.CustomerAddressCorrect();
             }
             else if (this.Text == "Update User")
             {

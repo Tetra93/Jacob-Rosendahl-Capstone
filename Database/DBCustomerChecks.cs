@@ -37,8 +37,6 @@ namespace Jacob_Rosendahl_Appointed_Program.Database
             return userExists;
         }
 
-        //public static bool UserCheck()
-
         public static bool AddressCheck(int inputID)
         {
             bool addressExists = false;
