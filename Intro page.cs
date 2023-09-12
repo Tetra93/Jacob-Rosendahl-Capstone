@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
     public partial class Intro : Form
     {

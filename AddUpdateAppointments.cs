@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Jacob_Rosendahl_C969_Scheduling_Application.Classes;
-using Jacob_Rosendahl_C969_Scheduling_Application.Database;
+using Jacob_Rosendahl_Appointed_Program.Classes;
+using Jacob_Rosendahl_Appointed_Program.Database;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
     public partial class AddUpdateAppointments : Form
     {
@@ -112,9 +112,24 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                         typeBox.Text = Appointment.AllAppointments[Appointments.CurrentIndex].Type;
                         AppointmentType = typeBox.Text;
                     }
-                    datePicker.Value = Appointment.AllAppointments[Appointments.CurrentIndex].Date.Date;
-                    startTimePicker.Value = datePicker.Value.Date + startTime;
-                    endTimePicker.Value = datePicker.Value.Date + endTime;
+                    if (Appointment.AllAppointments[Appointments.CurrentIndex].Date.Date <= DateTime.Now.Date)
+                    {
+                        datePicker.Value = Appointment.AllAppointments[Appointments.CurrentIndex].Date.Date;
+                    }
+                    else
+                    {
+                        datePicker.Value = DateTime.Now.Date;
+                    }
+                    if ((datePicker.Value.Date + startTime) <= DateTime.Now)
+                    {
+                        startTimePicker.Value = DateTime.Now.AddMinutes(1);
+                        endTimePicker.Value = DateTime.Now.AddMinutes(31);
+                    }
+                    else
+                    {
+                        startTimePicker.Value = datePicker.Value.Date + startTime;
+                        endTimePicker.Value = datePicker.Value.Date + endTime;
+                    }
                 }
                 CustomerName = customerName.Text;
                 ConsultantName = consultantName.Text;

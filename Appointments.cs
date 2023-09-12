@@ -8,10 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Jacob_Rosendahl_C969_Scheduling_Application.Classes;
-using Jacob_Rosendahl_C969_Scheduling_Application.Database;
+using Jacob_Rosendahl_Appointed_Program.Classes;
+using Jacob_Rosendahl_Appointed_Program.Database;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
     public partial class Appointments : Form
     {
@@ -402,12 +402,50 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             HomeMenu.homeMenu.Show();
         }
 
-        private void Appointments_Activated(object sender, EventArgs e)
+        //private void Appointments_Activated(object sender, EventArgs e)
+        //{
+        //    if (this.Visible == true)
+        //    {
+        //        return;
+        //    }
+        //    if (Login.CurrentUser.AccessLevel == 2)
+        //    {
+        //        Appointment.UserFilter(Login.CurrentUser.Name);
+        //    }
+        //    if (allRadio.Checked == true)
+        //    {
+        //        if (Login.CurrentUser.AccessLevel == 1)
+        //        {
+        //            dataGridView1.DataSource = Appointment.AllAppointments;
+        //        }
+        //        else
+        //        {
+        //            Appointment.UserFilter(Login.CurrentUser.Name);
+        //            dataGridView1.DataSource = Appointment.AppointmentsUserFiltered;
+        //        }
+        //    }
+
+        //    else if (currentWeekRadio.Checked == true)
+        //    {
+        //        CurrentWeekRadio_CheckedChanged(null, null);
+        //    }
+        //    else if (currentMonthRadio.Checked == true)
+        //    {
+        //        CurrentMonthRadio_CheckedChanged(null, null);
+        //    }
+        //    else if (otherRadio.Checked == true)
+        //    {
+        //        OtherRadio_CheckedChanged(null, null);
+        //    }
+        //}
+
+        private void Appointments_VisibleChanged(object sender, EventArgs e)
         {
-            if (this.Visible == true)
+            if (!this.Visible) 
             {
                 return;
             }
+            Appointment.PopulateAppointments();
             if (Login.CurrentUser.AccessLevel == 2)
             {
                 Appointment.UserFilter(Login.CurrentUser.Name);

@@ -4,10 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Jacob_Rosendahl_C969_Scheduling_Application.Classes;
-using Jacob_Rosendahl_C969_Scheduling_Application.Database;
+using Jacob_Rosendahl_Appointed_Program.Classes;
+using Jacob_Rosendahl_Appointed_Program.Database;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
 	static class Program
 	{

@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Jacob_Rosendahl_C969_Scheduling_Application.Classes;
-using Jacob_Rosendahl_C969_Scheduling_Application.Database;
+using Jacob_Rosendahl_Appointed_Program.Classes;
+using Jacob_Rosendahl_Appointed_Program.Database;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
     public partial class AddUpdateUser : Form
     {
@@ -74,6 +74,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
                 {
                     roleLabel.Visible = false;
                     roleComboBox.Visible = false;
+                    roleComboBox.SelectedIndex = 2;
+                    specialtyTextBox.Text = string.Empty;
                 }
                 UserID = (Users.LastId + 1);
                 IDTextBox.Text = UserID.ToString();

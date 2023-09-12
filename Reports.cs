@@ -9,10 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Jacob_Rosendahl_C969_Scheduling_Application.Classes;
+using Jacob_Rosendahl_Appointed_Program.Classes;
 using MySqlX.XDevAPI.Relational;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
     public partial class Reports : Form
     {
@@ -162,6 +162,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             }
             else if (reportTypeBox.SelectedItem.ToString() == "Login attempts")
             {
+                searchButton.Visible = false;
+                searchTextBox.Visible = false;
                 dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.Columns.Clear();
                 dataGridView1.Columns.Add("Timestamp", "Timestamp");

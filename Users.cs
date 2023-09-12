@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Jacob_Rosendahl_C969_Scheduling_Application.Classes;
-using Jacob_Rosendahl_C969_Scheduling_Application.Database;
+using Jacob_Rosendahl_Appointed_Program.Classes;
+using Jacob_Rosendahl_Appointed_Program.Database;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
     public partial class Users : Form
     {
@@ -116,9 +116,9 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             string searchValue = searchTextBox.Text.ToString();
             if (!string.IsNullOrWhiteSpace(searchValue))
             {
-                for (int i = 0; i < Customer.Customers.Count; i++)
+                for (int i = 0; i < usersList.Count; i++)
                 {
-                    if (Customer.Customers[i].ToString().ToUpper().Contains(searchValue.ToUpper()))
+                    if (usersList[i].ToString().ToUpper().Contains(searchValue.ToUpper()))
                     {
                         searchCount++;
                         dataGridView1.Rows[i].Selected = true;
@@ -274,6 +274,10 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
 
         private void Users_Activated(object sender, EventArgs e)
         {
+            if (dataGridView1.DefaultCellStyle.SelectionBackColor == Color.Green)
+            {
+                return;
+            }
             usersList.Clear();
             if (Login.CurrentUser.AccessLevel == 1)
             {

@@ -1,5 +1,5 @@
 ﻿
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
     partial class AddUpdateUser
     {

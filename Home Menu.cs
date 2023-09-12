@@ -1,4 +1,4 @@
-﻿using Jacob_Rosendahl_C969_Scheduling_Application.Classes;
+﻿using Jacob_Rosendahl_Appointed_Program.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
     public partial class HomeMenu : Form
     {

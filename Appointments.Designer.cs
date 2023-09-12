@@ -1,5 +1,5 @@
 ﻿
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
     partial class Appointments
     {
@@ -252,8 +252,8 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application
             this.Controls.Add(this.dataGridView1);
             this.Name = "Appointments";
             this.Text = "Appointments";
-            this.Activated += new System.EventHandler(this.Appointments_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Appointments_FormClosing);
+            this.VisibleChanged += new System.EventHandler(this.Appointments_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

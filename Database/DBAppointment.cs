@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
+namespace Jacob_Rosendahl_Appointed_Program.Database
 {
     class DBAppointment
     {
@@ -53,7 +53,7 @@ namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
             {
                 DBConnection.SqlString = $"UPDATE appointment " +
                     $"SET customerId = {AddUpdateAppointments.CustomerID}, consultantId = {AddUpdateAppointments.ConsultantID}, type = \"{AddUpdateAppointments.AppointmentType}\", start = \"{AddUpdateAppointments.StartTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss")}\", end = \"{AddUpdateAppointments.EndTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss")}\", lastUpdate = CURRENT_TIMESTAMP(), lastUpdateBy = \"{Login.UserName}\" " +
-                    $"WHERE appointmentId = {AppointmentID}";
+                    $"WHERE appointmentId = {Appointments.AppointmentID}";
                 DBConnection.Cmd = new MySqlCommand(DBConnection.SqlString, DBConnection.Conn);
                 DBConnection.Cmd.ExecuteNonQuery();
             }

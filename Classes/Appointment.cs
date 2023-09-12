@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Jacob_Rosendahl_C969_Scheduling_Application.Database;
+using Jacob_Rosendahl_Appointed_Program.Database;
 using MySql.Data.MySqlClient;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application.Classes
+namespace Jacob_Rosendahl_Appointed_Program.Classes
 {
     public class Appointment
     {

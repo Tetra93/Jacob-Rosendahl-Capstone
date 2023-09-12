@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
+namespace Jacob_Rosendahl_Appointed_Program.Database
 {
     class DBCustomerChecks
     {

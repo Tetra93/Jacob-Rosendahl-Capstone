@@ -1,4 +1,4 @@
-﻿using Jacob_Rosendahl_C969_Scheduling_Application.Database;
+﻿using Jacob_Rosendahl_Appointed_Program.Database;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application
+namespace Jacob_Rosendahl_Appointed_Program
 {
     public partial class ChangePassword : Form
     {

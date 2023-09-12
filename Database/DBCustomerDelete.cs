@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Jacob_Rosendahl_C969_Scheduling_Application.Classes;
+using Jacob_Rosendahl_Appointed_Program.Classes;
 using MySql.Data.MySqlClient;
 
-namespace Jacob_Rosendahl_C969_Scheduling_Application.Database
+namespace Jacob_Rosendahl_Appointed_Program.Database
 {
     class DBCustomerDelete
     {
